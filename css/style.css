@@ -104,8 +104,8 @@ section {
     padding: 0; /* Remove padding to prevent extra spacing */
     transition: transform 0.2s ease-in-out;
     will-change: transform;
-    width: 400px !important; /* Force new width */
-    height: 400px !important; /* Force new height */
+    width: 300px !important; /* Force new width */
+    height: 300px !important; /* Force new height */
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Ensures proper spacing */
