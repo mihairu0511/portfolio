@@ -86,57 +86,66 @@ section {
 /* Project Grid */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider cards */
-    gap: 20px; /* Ensures spacing */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Ensures responsive layout */
+    gap: 20px; /* Space between cards */
     padding: 20px;
     max-width: 1200px;
     margin: auto;
-    align-items: stretch; /* Makes sure all cards are equal height */
+    justify-content: center;
 }
 
-/* Project Card */
+/* Project Card (Fixed Size) */
 .project-card {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    padding: 15px;
+    padding: 0; /* Remove padding to prevent extra spacing */
     transition: transform 0.2s ease-in-out;
     will-change: transform;
-    min-height: 100%; /* Ensures cards expand properly */
+    width: 350px; /* Fixed width */
+    height: 450px; /* Fixed height */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensures proper spacing */
+    overflow: hidden;
 }
 
-.project-card:hover {
-    transform: scale(1.03);
-}
-
-/* Ensures Images Have Uniform Aspect Ratio */
+/* Image (Fills top 2/3 of the card) */
 .project-card img {
     width: 100%;
-    height: 200px; /* Ensures consistency */
-    object-fit: cover;
-    border-radius: 10px;
+    height: 66%; /* Takes up 2/3 of the card */
+    object-fit: cover; /* Ensures it fills the space without distortion */
+    border-radius: 10px 10px 0 0; /* Round only top corners */
 }
 
-/* Text Styles */
-.project-card h3 {
+/* Project Details (Bottom 1/3 of the card) */
+.project-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+/* Project Title */
+.project-info h3 {
     margin: 10px 0 5px;
     font-size: 1.2em;
 }
 
-.project-card p {
+/* Project Date */
+.project-info p {
     font-size: 0.9em;
     color: #666;
 }
 
-/* Buttons */
+/* Button */
 .btn {
     background: #007BFF;
     color: white;
-    padding: 10px 15px;
+    padding: 8px 15px;
     text-decoration: none;
     border-radius: 5px;
     display: inline-block;
@@ -146,4 +155,3 @@ section {
 .btn:hover {
     background: #0056b3;
 }
-
