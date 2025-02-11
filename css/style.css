@@ -136,10 +136,24 @@ section {
 }
 
 .project-info h3,
-.project-info p,
-.project-info .btn {
+.project-info p {
     margin: 2px 0 !important; /* Forces smaller spacing */
     padding: 0; /* Ensure no extra padding */
+}
+
+.btn {
+    background: #007BFF;
+    color: white;
+    padding: 8px 18px; /* Increase horizontal padding */
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 5px;
+    font-size: 1em; /* Adjust font size if needed */
+    min-width: 100px; /* Ensures a consistent minimum width */
+    text-align: center; /* Centers text inside the button */
+    margin: 2px 0 !important; /* Forces smaller spacing */
+    padding: 0;
 }
 
 .btn:hover {
