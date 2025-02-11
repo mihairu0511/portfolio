@@ -52,11 +52,13 @@ section {
 }
 
 /* ✅ Professional Experience List */
-section h2:contains("💼 経歴") + p + ul {
-    text-align: left;
-    margin-left: 20px;
-    padding-left: 20px;
+.experience-list {
+    text-align: left !important;  /* Overrides any inherited center alignment */
+    margin-left: 0 !important;  /* Ensures no unintended extra margins */
+    padding-left: 30px !important;  /* Proper indentation for bullets */
+    display: block;  /* Ensures correct behavior */
 }
+
 
 /* ✅ Mobile Optimization */
 @media (max-width: 768px) {
