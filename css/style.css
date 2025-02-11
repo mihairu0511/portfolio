@@ -130,7 +130,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: left;
+    align-items: center;
     padding: 5px; /* Reduce padding */
     gap: 5px; /* Reduce space between elements */
 }
