@@ -87,7 +87,7 @@ section {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider cards */
-    gap: 10px; /* Reduced gap for tighter spacing */
+    gap: 20px; /* Reduced gap for tighter spacing */
     padding: 20px;
     max-width: 1200px;
     margin: auto;
