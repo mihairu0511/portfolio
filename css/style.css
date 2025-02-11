@@ -52,7 +52,7 @@ section {
 }
 
 /* ✅ Professional Experience List */
-.experience-list {
+section h2:contains("💼 経歴") + p + ul {
     text-align: left;
     margin-left: 20px;
     padding-left: 20px;
