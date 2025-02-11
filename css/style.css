@@ -132,7 +132,7 @@ section {
     justify-content: center;
     align-items: center;
     padding: 5px; /* Reduce padding */
-    gap: 5px; /* Reduce space between elements */
+    gap: 5px !important; /* Reduce space between elements */
 }
 
 /* ✅ Project Title */
