@@ -51,13 +51,18 @@ section {
     background: #0056b3;
 }
 
-/* ✅ Professional Experience List */
-.experience-list {
-    text-align: left !important;  /* Overrides any inherited center alignment */
-    margin-left: 0 !important;  /* Ensures no unintended extra margins */
-    padding-left: 30px !important;  /* Proper indentation for bullets */
-    display: block;  /* Ensures correct behavior */
+.experience-container {
+    text-align: left; /* Ensures everything inside is left-aligned */
+    margin-left: 0;
+    padding-left: 20px;
 }
+
+.experience-list {
+    text-align: left !important;
+    margin-left: 0 !important;
+    padding-left: 30px !important;
+}
+
 
 
 /* ✅ Mobile Optimization */
