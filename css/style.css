@@ -132,30 +132,14 @@ section {
     justify-content: center;
     align-items: center;
     padding: 5px; /* Reduce padding */
-    gap: 5px !important; /* Reduce space between elements */
+    gap: 5px; /* Reduce space between elements */
 }
 
-/* ✅ Project Title */
-.project-info h3 {
-    margin: 10px 0 5px;
-    font-size: 1.2em;
-}
-
-/* ✅ Project Date */
-.project-info p {
-    font-size: 0.9em;
-    color: #666;
-}
-
-/* ✅ Button */
-.btn {
-    background: #007BFF;
-    color: white;
-    padding: 8px 15px;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-    margin-top: 10px;
+.project-info h3,
+.project-info p,
+.project-info .btn {
+    margin: 2px 0 !important; /* Forces smaller spacing */
+    padding: 0; /* Ensure no extra padding */
 }
 
 .btn:hover {
