@@ -103,8 +103,8 @@ section {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     width: 100%; /* Allow the grid to control the width */
-    max-width: 450px !important; /* Ensures uniform card size */
-    height: 450px !important;
+    max-width: 500px !important; /* Ensures uniform card size */
+    height: 500px !important;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
