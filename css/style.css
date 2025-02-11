@@ -87,11 +87,11 @@ section {
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Wider cards */
-    gap: 20px; /* Reduced gap for tighter spacing */
+    gap: 20px; /* Ensures spacing */
     padding: 20px;
     max-width: 1200px;
     margin: auto;
-    place-items: center; /* Ensures proper alignment */
+    align-items: stretch; /* Makes sure all cards are equal height */
 }
 
 /* Project Card */
@@ -103,9 +103,10 @@ section {
     padding: 15px;
     transition: transform 0.2s ease-in-out;
     will-change: transform;
-    min-height: 300px;
-    width: 100%; /* Ensures full width within grid */
-    max-width: 400px; /* Wider card appearance */
+    min-height: 100%; /* Ensures cards expand properly */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-card:hover {
@@ -115,7 +116,7 @@ section {
 /* Ensures Images Have Uniform Aspect Ratio */
 .project-card img {
     width: 100%;
-    height: 200px;
+    height: 200px; /* Ensures consistency */
     object-fit: cover;
     border-radius: 10px;
 }
