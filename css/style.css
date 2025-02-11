@@ -91,7 +91,7 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Creates a responsive grid */
     gap: 20px; /* Space between cards */
     padding: 20px;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto; /* Centering the grid */
     justify-content: center; /* Align grid in center */
     align-items: start; /*
