@@ -192,6 +192,9 @@ section {
 
 /* Ensures the image fills the circular space */
 .profile-card img {
+    position: absolute;
+    top: 20px;   /* Moves it 20px from the top */
+    left: 600px; /* Moves it 600px from the left */
     width: 100% !important;  /* Ensures image scales to container */
     height: 100% !important; /* Ensures image scales to container */
     border-radius: 50% !important; /* Forces circular image */
