@@ -180,26 +180,25 @@ section {
 /* Profile Image Card */
 .profile-card {
     position: absolute;
-    top: 15px; /* Adjust vertical position */
-    right: 15px; /* Adjust horizontal position */
-    width: 50px !important; /* Set fixed width */
-    height: 50px !important; /* Set fixed height */
+    top: 15px;
+    right: 15px;
+    width: 50px !important; /* Force container size */
+    height: 50px !important;
     border-radius: 50%; /* Makes it circular */
-    overflow: hidden; /* Ensures image fits inside the circle */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
-    border: 2px solid white; /* Optional: Adds a clean border */
+    overflow: hidden; /* Ensures the image does not exceed the container */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid white;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Ensures the image fits perfectly inside the circular container */
+/* Force Image to Fit Inside Profile Card */
 .profile-card img {
-    display: block !important;  /* Ensures no extra margins */
-    max-width: 50px !important;  /* Forces a maximum width */
-    max-height: 50px !important; /* Forces a maximum height */
-    width: 50px !important; /* Explicitly set */
-    height: 50px !important; /* Explicitly set */
-    object-fit: cover !important; /* Ensures it fits without distortion */
-    overflow: hidden !important; /* Prevents any overflow issues */
+    max-width: 50px !important;
+    max-height: 50px !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* Ensures image scales correctly */
+    display: block !important; /* Remove extra spacing */
 }
