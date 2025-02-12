@@ -195,7 +195,7 @@ section {
 
 /* Ensures the image fits perfectly inside the circular container */
 .profile-card img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover; /* Keeps the image proportional */
+    width: 50px !important; /* Force exact width */
+    height: 50px !important; /* Force exact height */
+    object-fit: cover; /* Ensures the image doesn’t stretch */
 }
