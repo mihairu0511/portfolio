@@ -1,49 +1,93 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Name</title>
+  <style>
+    /* Basic Reset */
+    body, h1, h2, p, ul {
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Parent Container */
+    #parent {
+      width: 100vw;
+      min-height: 100vh;
+    }
+
+    /* Left Section: Project Description */
+    #child1 {
+      background-color: lightblue;
+      padding: 20px;
+    }
+
+    /* Right Section: Media (YouTube Video) */
+    #child2 {
+      background-color: lightgreen;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Responsive: Switch to two-column layout on wider screens */
+    @media (min-width: 600px) {
+      #parent {
+        display: flex;
+      }
+      #child1, #child2 {
+        flex-grow: 1;
+      }
+    }
+
+    /* Responsive YouTube Video */
+    iframe {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Project Name</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../projects.html">Projects</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <h1>Project Name</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="project-container">
-        <!-- Left Section: Text Content -->
-        <div class="project-text">
-            <h2>プロジェクト概要</h2>
-            <p>このプロジェクトの目的と特徴について説明します。</p>
+  <div id="parent">
+    <!-- Left Section: Project Description -->
+    <div id="child1">
+      <h2>プロジェクト概要</h2>
+      <p>このプロジェクトの目的と特徴について説明します。</p>
 
-            <h2>技術スタック</h2>
-            <ul>
-                <li>技術 1</li>
-                <li>技術 2</li>
-                <li>技術 3</li>
-            </ul>
+      <h2>技術スタック</h2>
+      <ul>
+        <li>技術 1</li>
+        <li>技術 2</li>
+        <li>技術 3</li>
+      </ul>
 
-            <h2>開発プロセス</h2>
-            <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
-        </div>
-
-        <!-- Right Section: Video or Image -->
-        <div class="project-media">
-            <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-            gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+      <h2>開発プロセス</h2>
+      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
     </div>
+
+    <!-- Right Section: YouTube Video -->
+    <div id="child2">
+      <iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
 </body>
 </html>
 
