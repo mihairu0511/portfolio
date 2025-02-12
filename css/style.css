@@ -177,20 +177,16 @@ section {
     }
 }
 
-/* Profile Image Card (Ensures Circle Shape) */
+/* Profile Image Card (Top-Right Position) */
 .profile-card {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 50px !important;  /* Fix the width */
-    height: 50px !important; /* Fix the height */
-    border-radius: 50% !important; /* Ensures circular shape */
-    overflow: hidden !important; /* Clips anything outside */
+    top: 10px; /* Adjust for exact positioning */
+    right: 10px; /* Moves it to the top-right corner */
+    width: 50px !important; /* Fixed size */
+    height: 50px !important;
+    overflow: hidden; /* Prevents overflow issues */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border: 2px solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 
