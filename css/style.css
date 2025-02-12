@@ -176,30 +176,3 @@ section {
         height: 60%;
     }
 }
-
-.profile-card {
-    position: absolute !important;  /* Ensure absolute positioning */
-    top: 20px !important;  /* Move down by 20px */
-    left: 600px !important;  /* Move right by 600px */
-    width: 50px !important;  /* Keep image size fixed */
-    height: 50px !important;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border: 2px solid white;
-}
-
-
-/* Ensures the image fills the circular space */
-.profile-card img {
-    position: absolute;
-    top: 20px;   /* Moves it 20px from the top */
-    left: 600px; /* Moves it 600px from the left */
-    width: 100% !important;  /* Ensures image scales to container */
-    height: 100% !important; /* Ensures image scales to container */
-    border-radius: 50% !important; /* Forces circular image */
-    object-fit: cover !important; /* Ensures it fills without stretching */
-    display: block !important;
-}
-
-
