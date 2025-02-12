@@ -177,47 +177,47 @@ section {
     }
 }
 
-/* Parent container: Two-column layout */
+/* Parent container */
 .project-container {
-    display: flex !important; /* Ensure flexbox applies */
-    flex-direction: row !important; /* Side-by-side layout */
-    align-items: flex-start;
-    justify-content: space-between;
     width: 100vw;
     min-height: 100vh;
-    padding: 0 5vw;
-    margin: 0 auto;
-    gap: 30px; /* Space between text and media */
+    padding: 0;
+    margin: 0;
 }
 
-/* Left Section (Text Content) */
+/* Left Section: Project Text */
 .project-text {
-    flex: 1; /* Takes up 50% */
-    text-align: left;
-    min-width: 300px; /* Ensures it doesn't shrink too much */
+    background-color: #f0f8ff; /* Light blue */
+    padding: 20px;
 }
 
-/* Right Section (Video/Image) */
+/* Right Section: Project Media */
 .project-media {
-    flex: 1; /* Takes up 50% */
+    background-color: #d4edda; /* Light green */
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Mobile-first: Stacks vertically */
+@media (min-width: 600px) {
+    .project-container {
+        display: flex; /* Enables flexbox for side-by-side */
+    }
+    .project-text {
+        flex-grow: 1;
+    }
+    .project-media {
+        flex-grow: 1;
+    }
+}
+
 /* Ensure iframe (YouTube) or images are responsive */
 .project-media iframe,
 .project-media img {
-    width: 100%;
-    max-width: 560px;
+    max-width: 100%;
     height: auto;
     object-fit: contain;
-}
-
-/* Responsive: Stack layout on small screens */
-@media (max-width: 600px) {
-    .project-container {
-        flex-direction: column !important; /* Stack vertically */
-    }
 }
 
