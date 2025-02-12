@@ -180,19 +180,19 @@ section {
 /* Two-column layout for project description */
 .project-container {
     display: flex;
-    flex-direction: row; /* Side-by-side layout */
+    flex-direction: row; /* Ensure side-by-side layout */
     align-items: flex-start; /* Align content to the top */
+    justify-content: space-between; /* Ensure equal spacing */
     width: 100vw; /* Full viewport width */
     height: auto;
-    padding: 0;
+    padding: 0 5vw; /* Reduce horizontal padding */
     margin: 0 auto;
-    gap: 30px; /* Space between columns */
+    gap: 30px; /* Space between text and media */
 }
 
 /* Left Section (Text Content) */
 .project-text {
     flex: 1; /* Takes up 50% of the page */
-    padding: 20px; /* Small padding */
     text-align: left;
 }
 
@@ -202,13 +202,13 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 }
 
 /* Ensure iframe (YouTube) or images are responsive */
 .project-media iframe,
 .project-media img {
-    max-width: 90%;
+    width: 100%; /* Ensure it fills the right column */
+    max-width: 560px; /* Limit max width */
     height: auto;
     object-fit: contain;
 }
