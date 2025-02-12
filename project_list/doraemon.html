@@ -5,24 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Name</title>
   <style>
-    /* Basic Reset */
-    body, h1, h2, p, ul {
+    /* Reset Margin & Padding */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box; /* Prevents padding from affecting width */
     }
 
-    /* Header Styling (Same as Other Pages) */
+    /* Prevent Horizontal Scrolling */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Header Styling (Same as Other Pages, No Padding) */
     header {
       background-color: #333;
       color: white;
-      padding: 20px;
       text-align: center;
       font-size: 24px;
     }
 
     nav ul {
       list-style: none;
-      padding: 0;
       text-align: center;
       margin-top: 10px;
     }
@@ -41,11 +47,10 @@
     /* Parent Container */
     #parent {
       width: 100vw;
-      min-height: 100vh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 10px; /* Adds slight gap between sections */
-      padding: 10px; /* Padding on edges */
+      gap: 10px; /* Adds gap between sections */
     }
 
     /* Left Section: Project Description */
@@ -53,6 +58,7 @@
       background-color: lightblue;
       padding: 20px;
       border-radius: 10px;
+      flex-grow: 1;
     }
 
     /* Right Section: Media (YouTube Video) */
@@ -63,15 +69,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-grow: 1;
     }
 
     /* Responsive: Switch to Two-Column Layout on Wider Screens */
     @media (min-width: 600px) {
       #parent {
         flex-direction: row;
-      }
-      #child1, #child2 {
-        flex-grow: 1;
       }
     }
 
@@ -124,4 +128,5 @@
   </div>
 </body>
 </html>
+
 
