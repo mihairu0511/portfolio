@@ -9,7 +9,7 @@
     * {
       margin: 0;
       padding: 0;
-      box-sizing: border-box; /* Prevents padding from affecting width */
+      box-sizing: border-box;
     }
 
     /* Prevent Horizontal Scrolling */
@@ -19,12 +19,13 @@
       overflow-x: hidden;
     }
 
-    /* Header Styling (Same as Other Pages, No Padding) */
+    /* Header Styling */
     header {
       background-color: #333;
       color: white;
       text-align: center;
       font-size: 24px;
+      padding: 20px 0; /* Vertical padding for spacing */
     }
 
     nav ul {
@@ -47,16 +48,17 @@
     /* Parent Container */
     #parent {
       width: 100vw;
-      height: 100vh;
+      min-height: calc(100vh - 100px); /* Leaves space for the header & bottom gap */
       display: flex;
       flex-direction: column;
-      gap: 10px; /* Adds gap between sections */
+      gap: 20px; /* Gap between sections */
+      padding-bottom: 20px; /* Space at the bottom */
     }
 
     /* Left Section: Project Description */
     #child1 {
       background-color: lightblue;
-      padding: 20px;
+      padding: 20px 40px 20px 60px; /* More left padding */
       border-radius: 10px;
       flex-grow: 1;
     }
@@ -64,7 +66,7 @@
     /* Right Section: Media (YouTube Video) */
     #child2 {
       background-color: lightgreen;
-      padding: 20px;
+      padding: 20px 60px 20px 40px; /* More right padding */
       border-radius: 10px;
       display: flex;
       justify-content: center;
@@ -76,6 +78,8 @@
     @media (min-width: 600px) {
       #parent {
         flex-direction: row;
+        align-items: flex-start;
+        padding-top: 20px; /* Adds gap between header and children */
       }
     }
 
