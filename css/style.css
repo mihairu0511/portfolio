@@ -177,37 +177,47 @@ section {
     }
 }
 
-/* Parent container for responsive two-column layout */
+/* Parent container: Two-column layout */
 .project-container {
-    display: flex;
-    flex-direction: column; /* Default: Stack vertically */
+    display: flex !important; /* Ensure flexbox applies */
+    flex-direction: row !important; /* Side-by-side layout */
+    align-items: flex-start;
+    justify-content: space-between;
     width: 100vw;
     min-height: 100vh;
-    padding: 0;
-    margin: 0;
+    padding: 0 5vw;
+    margin: 0 auto;
+    gap: 30px; /* Space between text and media */
 }
 
 /* Left Section (Text Content) */
 .project-text {
-    background-color: #f0f8ff; /* Light blue background */
-    padding: 20px;
-    flex-grow: 1; /* Expands when in flex mode */
+    flex: 1; /* Takes up 50% */
+    text-align: left;
+    min-width: 300px; /* Ensures it doesn't shrink too much */
 }
 
-/* Right Section (Media) */
+/* Right Section (Video/Image) */
 .project-media {
-    background-color: #d4edda; /* Light green background */
-    padding: 20px;
-    flex-grow: 1; /* Expands when in flex mode */
+    flex: 1; /* Takes up 50% */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Responsive: Switch to side-by-side when screen is wide */
-@media (min-width: 600px) {
+/* Ensure iframe (YouTube) or images are responsive */
+.project-media iframe,
+.project-media img {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Responsive: Stack layout on small screens */
+@media (max-width: 600px) {
     .project-container {
-        flex-direction: row; /* Side-by-side layout */
+        flex-direction: column !important; /* Stack vertically */
     }
 }
 
