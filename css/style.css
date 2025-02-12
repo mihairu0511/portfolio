@@ -176,3 +176,39 @@ section {
         height: 60%;
     }
 }
+
+    /* Split Container */
+.split-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+/* Left Section (Project Details) */
+.left-section {
+    flex: 1; /* Takes up 50% of the page */
+    padding: 10px; /* Minimal padding */
+    background: #f8f9fa; /* Light background */
+    overflow-y: auto; /* Scroll if content overflows */
+}
+
+/* Right Section (Project Gallery) */
+.right-section {
+    flex: 1; /* Takes up 50% of the page */
+    padding: 10px; /* Minimal padding */
+    background: #ffffff; /* White background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ensure Images Fit Properly */
+.right-section img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
