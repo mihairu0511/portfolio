@@ -182,10 +182,10 @@ section {
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 50px !important; /* Force container size */
+    width: 50px !important;
     height: 50px !important;
-    border-radius: 50%; /* Makes it circular */
-    overflow: hidden; /* Ensures the image does not exceed the container */
+    border-radius: 50%;
+    overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border: 2px solid white;
     display: flex;
@@ -193,12 +193,12 @@ section {
     align-items: center;
 }
 
-/* Force Image to Fit Inside Profile Card */
+/* ✅ FORCE IMAGE TO SMALL SIZE */
 .profile-card img {
     max-width: 50px !important;
     max-height: 50px !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* Ensures image scales correctly */
-    display: block !important; /* Remove extra spacing */
+    width: 50px !important;
+    height: 50px !important;
+    object-fit: cover !important;
+    display: block !important;
 }
