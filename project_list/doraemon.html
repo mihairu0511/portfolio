@@ -1,50 +1,37 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sample</title>
+  <style>
+    #child1 {
+      background-color: lightblue;
+    }
+    #child2 {
+      background-color: lightgreen;
+    }
+
+    @media (min-width: 600px) {
+      #parent {
+        display: flex;
+      }
+      #child1 {
+        flex-grow: 1;
+      }
+      #child2 {
+        flex-grow: 1;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Project Name</h1>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../projects.html">Projects</a></li>
-                <li><a href="../contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="project-container">
-        <!-- Left Section: Text Content -->
-        <section class="project-text">
-            <h2>プロジェクト概要</h2>
-            <p>このプロジェクトの目的と特徴について説明します。</p>
-
-            <h2>技術スタック</h2>
-            <ul>
-                <li>技術 1</li>
-                <li>技術 2</li>
-                <li>技術 3</li>
-            </ul>
-
-            <h2>開発プロセス</h2>
-            <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
-        </section>
-
-        <!-- Right Section: Video or Image -->
-        <section class="project-media">
-            <iframe width="560" height="315" 
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-            gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </section>
-    </main>
+  <div id="parent">
+    <div id="child1">子要素１</div>
+    <div id="child2">子要素２</div>
+  </div>
 </body>
+</html>
 </html>
 
 
