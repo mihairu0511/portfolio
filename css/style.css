@@ -195,7 +195,11 @@ section {
 
 /* Ensures the image fits perfectly inside the circular container */
 .profile-card img {
-    width: 50px !important; /* Force exact width */
-    height: 50px !important; /* Force exact height */
-    object-fit: cover; /* Ensures the image doesn’t stretch */
+    display: block !important;  /* Ensures no extra margins */
+    max-width: 50px !important;  /* Forces a maximum width */
+    max-height: 50px !important; /* Forces a maximum height */
+    width: 50px !important; /* Explicitly set */
+    height: 50px !important; /* Explicitly set */
+    object-fit: cover !important; /* Ensures it fits without distortion */
+    overflow: hidden !important; /* Prevents any overflow issues */
 }
