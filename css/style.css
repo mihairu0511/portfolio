@@ -177,38 +177,37 @@ section {
     }
 }
 
-/* Two-column layout for project description */
+/* Parent container for responsive two-column layout */
 .project-container {
     display: flex;
-    flex-direction: row; /* Ensure side-by-side layout */
-    align-items: flex-start; /* Align content to the top */
-    justify-content: space-between; /* Ensure equal spacing */
-    width: 100vw; /* Full viewport width */
-    height: auto;
-    padding: 0 5vw; /* Reduce horizontal padding */
-    margin: 0 auto;
-    gap: 30px; /* Space between text and media */
+    flex-direction: column; /* Default: Stack vertically */
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
 }
 
 /* Left Section (Text Content) */
 .project-text {
-    flex: 1; /* Takes up 50% of the page */
-    text-align: left;
+    background-color: #f0f8ff; /* Light blue background */
+    padding: 20px;
+    flex-grow: 1; /* Expands when in flex mode */
 }
 
-/* Right Section (Video/Image) */
+/* Right Section (Media) */
 .project-media {
-    flex: 1; /* Takes up 50% of the page */
+    background-color: #d4edda; /* Light green background */
+    padding: 20px;
+    flex-grow: 1; /* Expands when in flex mode */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Ensure iframe (YouTube) or images are responsive */
-.project-media iframe,
-.project-media img {
-    width: 100%; /* Ensure it fills the right column */
-    max-width: 560px; /* Limit max width */
-    height: auto;
-    object-fit: contain;
+/* Responsive: Switch to side-by-side when screen is wide */
+@media (min-width: 600px) {
+    .project-container {
+        flex-direction: row; /* Side-by-side layout */
+    }
 }
+
