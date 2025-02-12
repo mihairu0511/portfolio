@@ -177,19 +177,20 @@ section {
     }
 }
 
-//* Profile Image Card */
+/* Profile Image Card */
 .profile-card {
     position: absolute;
     top: 15px; /* Adjust vertical position */
     right: 15px; /* Adjust horizontal position */
-    max-width: 60px !important;
-    max-height: 60px !important;
-    width: 50px !important; /* Reduce size */
-    height: 50px !important;
+    width: 50px !important; /* Set fixed width */
+    height: 50px !important; /* Set fixed height */
     border-radius: 50%; /* Makes it circular */
     overflow: hidden; /* Ensures image fits inside the circle */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
     border: 2px solid white; /* Optional: Adds a clean border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Ensures the image fits perfectly inside the circular container */
