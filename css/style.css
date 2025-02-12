@@ -177,15 +177,15 @@ section {
     }
 }
 
-/* Profile Image Card (Forces Circle) */
+/* Profile Image Card (Ensures Circle Shape) */
 .profile-card {
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 50px !important;  /* Ensures circular shape */
-    height: 50px !important; /* Ensures circular shape */
-    border-radius: 50% !important; /* Makes it circular */
-    overflow: hidden; /* Ensures image stays inside the circle */
+    width: 50px !important;  /* Fix the width */
+    height: 50px !important; /* Fix the height */
+    border-radius: 50% !important; /* Ensures circular shape */
+    overflow: hidden !important; /* Clips anything outside */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     border: 2px solid white;
     display: flex;
@@ -193,12 +193,14 @@ section {
     align-items: center;
 }
 
-/* ✅ Force Image to Stay Circular */
+
+/* Ensures the image fills the circular space */
 .profile-card img {
-    width: 100% !important;  /* Ensures full fit */
-    height: 100% !important; /* Ensures full fit */
-    object-fit: cover !important; /* Ensures image fills container */
-    border-radius: 50% !important; /* Forces circle */
+    width: 100% !important;  /* Ensures image scales to container */
+    height: 100% !important; /* Ensures image scales to container */
+    border-radius: 50% !important; /* Forces circular image */
+    object-fit: cover !important; /* Ensures it fills without stretching */
     display: block !important;
 }
+
 
