@@ -177,7 +177,7 @@ section {
     }
 }
 
-    /* Split Container */
+/* Split Container */
 .split-container {
     display: flex;
     flex-direction: row;
