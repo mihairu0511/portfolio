@@ -182,6 +182,8 @@ section {
     position: absolute;
     top: 15px; /* Adjust vertical position */
     right: 15px; /* Adjust horizontal position */
+    max-width: 60px !important;
+    max-height: 60px !important;
     width: 50px !important; /* Reduce size */
     height: 50px !important;
     border-radius: 50%; /* Makes it circular */
@@ -192,7 +194,7 @@ section {
 
 /* Ensures the image fits perfectly inside the circular container */
 .profile-card img {
-    width: 100%;
-    height: 100%;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover; /* Keeps the image proportional */
 }
