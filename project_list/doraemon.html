@@ -25,7 +25,7 @@
       color: white;
       text-align: center;
       font-size: 24px;
-      padding: 20px 0; /* Vertical padding for spacing */
+      padding: 20px 0; /* Vertical padding */
     }
 
     nav ul {
@@ -53,12 +53,14 @@
       flex-direction: column;
       gap: 20px; /* Gap between sections */
       padding-bottom: 20px; /* Space at the bottom */
+      padding-left: 40px; /* Horizontal padding for the colored sections */
+      padding-right: 40px;
     }
 
     /* Left Section: Project Description */
     #child1 {
       background-color: lightblue;
-      padding: 20px 40px 20px 60px; /* More left padding */
+      padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       flex-grow: 1;
     }
@@ -66,12 +68,17 @@
     /* Right Section: Media (YouTube Video) */
     #child2 {
       background-color: lightgreen;
-      padding: 20px 60px 20px 40px; /* More right padding */
+      padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-grow: 1;
+    }
+
+    /* Vertical Padding Between Text Elements */
+    #child1 h2, #child1 p, #child1 ul {
+      margin-bottom: 15px;
     }
 
     /* Responsive: Switch to Two-Column Layout on Wider Screens */
@@ -132,5 +139,6 @@
   </div>
 </body>
 </html>
+
 
 
