@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Name</title>
+  <style>
+    /* Reset Margin & Padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Prevent Horizontal Scrolling */
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Header Styling */
+    header {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      font-size: 15px;
+      padding: 20px 0; /* Vertical padding */
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    /* Parent Container */
+    #parent {
+      width: 100vw;
+      min-height: calc(100vh - 100px); /* Leaves space for the header & bottom gap */
+      display: flex;
+      flex-direction: column;
+      gap: 20px; /* Gap between sections */
+      padding-bottom: 20px; /* Space at the bottom */
+      padding-left: 30px; /* Horizontal padding for the colored sections */
+      padding-right: 30px;
+    }
+
+    /* Left Section: Project Description */
+    #child1 {
+      background-color: #E3F2FD;
+      padding: 40px; /* Adds padding inside the section */
+      border-radius: 10px;
+      flex-grow: 1;
+    }
+
+    /* Right Section: Media (YouTube Video) */
+    #child2 {
+      background-color: #E3F2FD;
+      padding: 40px; /* Adds padding inside the section */
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+    }
+
+    /* Vertical Padding Between Text Elements */
+    #child1 h2, #child1 p, #child1 ul {
+      margin-bottom: 15px;
+      padding-left: 0; /* Remove default indentation */
+      list-style-position: inside; /* Align bullets with text */
+    }
+
+    /* Responsive: Switch to Two-Column Layout on Wider Screens */
+    @media (min-width: 600px) {
+      #parent {
+        flex-direction: row;
+        align-items: flex-start;
+        padding-top: 20px; /* Adds gap between header and children */
+      }
+    }
+
+    /* Responsive YouTube Video */
+    iframe {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Project Name</h1>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="parent">
+    <!-- Left Section: Project Description -->
+    <div id="child1">
+      <h2>プロジェクト概要</h2>
+      <p>このプロジェクトの目的と特徴について説明します。</p>
+
+      <h2>技術スタック</h2>
+      <ul>
+        <li>技術 1</li>
+        <li>技術 2</li>
+        <li>技術 3</li>
+      </ul>
+
+      <h2>開発プロセス</h2>
+      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+    </div>
+
+    <!-- Right Section: YouTube Video -->
+    <div id="child2">
+      <iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</body>
+</html>
