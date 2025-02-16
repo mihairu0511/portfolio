@@ -62,10 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: center;
+      align-items: center;
       flex-grow: 1;
-      width: 380px; /* Set to your desired fixed width */
-      flex-shrink: 0; /* Prevent shrinking if inside a flex container */
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+  /* Ensure the image inside #child1 matches the styling of #child2 */
+  #child1 img {
+    margin-top: 20px; /* Adds space between text and image */
+    max-width: 100%; /* Ensures the image does not exceed the container width */
+    height: auto; /* Maintains aspect ratio */
+    border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+  }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
