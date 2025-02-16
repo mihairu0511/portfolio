@@ -73,11 +73,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
+      flex-direction: column; /* Stack children vertically */
       justify-content: center;
       align-items: center;
       flex-grow: 1;
       width: 220px; /* Set to your desired fixed width */
-      flex-shrink: 0; /* Prevent shrinking if inside a flex container */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 20px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
