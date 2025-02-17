@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hybrid Animal Sound Synthesis</title>
+  <title>Processing: p5.jsで遊んでみる</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,17 +116,46 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+      gap: 5px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Hybrid Animal Sound Synthesis</h1>
+    <h1>Processing: p5.jsで遊んでみる</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -113,30 +166,65 @@
   </header>
 
   <div id="parent">
-    <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
-
-      <h2>技術スタック</h2>
+      <h2><u>衛星シミュレーション</u></h2>
+      <p>Processing の p5.js というライブラリを授業で初めて使用したのでマウスの位置を中心に動く衛星のシミュレーションを作ってみました。</p>
+      <h2><u>システムの基本構造</u></h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
-      </ul>
-
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+        <li><a><b>衛星の配置</b></a>
+          <ul>
+            <li><a>メインの六角形</a></li>
+            <ul>
+              <li><a>画面の中央に最も大きな六角形を描画しています。</a></li>
+              <li><a>この六角形を基準として、周囲に衛星を配置しています。</a></li>
+            </ul>
+            <li><a>衛星の配置の計算</a></li>
+            <ul>
+              <li><a>衛星は六角形の頂点を基準に配置しています。</a></li>
+              <li><a>60度ずつ回転しながら、円の周りに衛星を並べています。</a></li>
+              <li><a>最初の1つは、常にマウスの位置に配置されます。</a></li>
+            </ul>
+            <li><a>色の変化</a></li>
+            <ul>
+              <li><a>内側から外側に向かって色を変化させ、奥行きのある視覚効果を作成しています。</a></li>
+              <li><a>より外側の衛星ほど明るい色になります。</a></li>
+            </ul>
+          </ul>
+        </li>
+        <li><a><b>再帰的に衛星を描画</b></a></li>
+        <ul>
+            <li><a>中心の六角形 → 衛星 → さらに小さな衛星というように階層的に生成されています。</a></li>
+            <li><a>一定の回数（例えば4回）まで、小さな衛星を再帰的に描画しています。</a></li>
+            <li><a>一定の小ささに達したら、それ以上小さい衛星は描画しないようになっています。</a></li>
+        </ul>
+        <li><a><b>インタラクション</b></a></li>
+        <ul>
+            <li><a>マウスの影響</a></li>
+              <ul>
+                <li><a>マウスの位置が変わると、衛星全体がそれに合わせて動きます。</a></li>
+                <li><a>衛星の角度や距離がリアルタイムで更新されます。</a></li>
+              </ul>
+            <li><a>中心と衛星の関係</a></li>
+              <ul>
+                <li><a>衛星の動きは、中心の六角形とマウスの位置の関係に影響されます。</a></li>
+                <li><a>より遠くにマウスを動かすと、衛星が大きく広がります。</a></li>
+              </ul>
+          </ul>
     </div>
-
-    <!-- Right Section: YouTube Video -->
+    
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトのコードは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。フォルダーをダウンロードしてHTMLファイルをダブルクリックすればウェブで開けます。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/kEfty9mDPyc" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <p>中心の6角形の線画</p>
+      <img src="../images/draw_hex.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>衛星の位置の計算と配色</p>
+      <img src="../images/draw_satellite.png" alt="テスト画像">
     </div>
   </div>
 </body>
