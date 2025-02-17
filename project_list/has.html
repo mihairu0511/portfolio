@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hybrid Animal Sound Synthesis</title>
+  <title>OpenGL.js: 3D描画システム</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -134,46 +134,28 @@
       border-radius: 5px;
     }
 
-ul {
-  list-style-type: disc; /* Bullet points */
-  padding-left: 20px;
-}
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
 
-ul li {
-  padding-left: 5px;
-  text-indent: -1.2em; /* Aligns the second line properly */
-}
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+    }
 
-ul li::marker {
-  font-size: 1em;
-}
-
-ul ul {
-  list-style-type: circle;
-  margin-left: 20px;
-}
-
-ul ul li {
-  padding-left: 1em;
-  text-indent: -0.8em;
-}
-
-ul ul ul {
-  list-style-type: square;
-  margin-left: 20px;
-}
-
-ul ul ul li {
-  padding-left: 0.8em;
-  text-indent: -0.8em;
-}
-
-
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+      gap: 5px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Hybrid Animal Sound Synthesis</h1>
+    <h1>Processing: OpenGL再現</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -185,40 +167,64 @@ ul ul ul li {
 
   <div id="parent">
     <div id="child1">
-      <h2><u>物理モデル音源</u></h2>
-      <p>物理モデル音源を使って何か新しいものを作るという課題が授業で出されたので色々と調べていたところ、動物の鳴き声に関するリアルタイム演算の研究を見つけました。そこで、異なる動物の発声器官を組み合わせて存在しない動物の音をコンピューター上で再現できるんじゃないかと考え、３人グループでそれに関するオーディオプラグインを作ることにしました。</p>
-      <h2><u>背景と目的</u></h2>
+      <h2><u>Processing: OpenGL再現</u></h2>
+      <p>Processing の p5.js では WebGL という OpenGL に非常に似たライブラリが使用されています。その技術の理解を深めるために、OpenGLのような設計で、行列変換・透視投影・頂点描画などの機能を再現していきます。</p>
+      <h2><u>主な機能 (opengl.js)</u></h2>
       <ul>
-        <li><b>従来のクリーチャーボイス制作</b>
-        <ul>
-          <li>映画やゲームにおけるクリーチャーの音作りは、実在の動物や人間の録音を加工することが一般的。</li>
-          <li>ピッチシフト、レイヤリング、エフェクトなどの手法が用いられるが、録音に依存するため柔軟性に欠ける。</li>
-        </ul>
+        <li><a><b>投影</b></a>
+          <ul>
+            <li><a>ortho(left, right, bottom, top, near, far) : 正投影（オルソグラフィック）を設定</a></li>
+            <ul>
+              <li><a>遠近感がなく、オブジェクトのスケールは変わりません。</a></li>
+              <li><a>主にUIやCADのような技術用途に使われます。</a></li>
+            </ul>
+            <li><a>perspective(fov, near, far) : 透視投影（パースペクティブ）を設定</a></li>
+            <ul>
+              <li><a>遠近感を持つ描画が可能です。</a></li>
+              <li><a>3Dゲームや仮想現実の視覚効果に使用されます。</a></li>
+            </ul>
+          </ul>
         </li>
-        <li><b>物理モデリングによるアプローチ</b>
+        <li><a><b>行列変換</b></a></li>
         <ul>
-            <li>実際の動物の発声器官（肺、喉頭、声道など）を数学モデルとして再現し、それらを組み合わせて新しい生物の声をシミュレートする。</li>
-            <li>録音不要で、リアルタイムに音を生成可能。</li>
-            <li>インタラクティブメディア（ゲーム・VR）向けに、動的なサウンドデザインが可能になる。</li>
+            <li><a>Translate(x, y, z) : 座標を平行移動</a></li>
+            <li><a>Scale(x, y, z) : 拡大・縮小</a></li>
+            <li><a>RotateX(θ), RotateY(θ), RotateZ(θ) : X/Y/Z軸周りの回転</a></li>
         </ul>
-        </li>
+        <li><a><b>描画</b></a></li>
+        <ul>
+            <li><a>BeginShape() → Vertex(x, y, z) → EndShape() の流れで描画</a></li>
+            <li><a>mapToScreen(x, y, z) : 3D座標をスクリーン座標に変換</a></li>
+          </ul>
+        <li><a><b>行列管理</b></a></li>
+        <ul>
+            <li><a>Init_Matrix_Stack() : 行列スタックを初期化</a></li>
+            <li><a>Push_Matrix() / Pop_Matrix() : 行列の保存・復元</a></li>
+        </ul>
       </ul>
-
+      <h2><u>テストケース(projection_test.js)</u></h2>
+      <p>キー入力 (1 ~ 9, 0) に応じて、異なるテスト描画が実行できます。</p>
+      <ul>
+        <li><a>1 ~ 3: 正投影（Ortho）による四角形描画（通常・スケール変換・回転）</a></li>
+        <li><a>4 ~ 5: 顔の描画</a></li>
+        <li><a>6 ~ 9: 立方体の描画（正投影・透視投影）</a></li>
+        <li><a>0: 自分のイニシャルを透視投影で書いてみました。</a></li>
+      </ul>
     </div>
     
     <div id="child2">
-      <p>プロジェクトのコードは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。フォルダーをダウンロードしてHTMLファイルをダブルクリックすればウェブで開けます。</p>
+      <p>プロジェクトのコードは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。フォルダーをダウンロードしてHTMLファイルをダブルクリックすればテストがウェブで開けます。</p>
       <br>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/kEfty9mDPyc" title="YouTube video player" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6cARzz9p73A" title="YouTube video player" allowfullscreen></iframe>
       </div>
       <br>
-      <p>中心の6角形の線画</p>
-      <img src="../images/draw_hex.png" alt="テスト画像">
+      <p>正投影（オルソグラフィック）</p>
+      <img src="../images/perspective.jpg" alt="テスト画像">
       <br>
       <br>
-      <p>衛星の位置の計算と配色</p>
-      <img src="../images/draw_satellite.png" alt="テスト画像">
+      <p>透視投影（パースペクティブ）</p>
+      <img src="../images/ortho.jpg" alt="テスト画像">
     </div>
   </div>
 </body>
