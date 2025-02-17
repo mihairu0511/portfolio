@@ -3,29 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Processing: OpenGL再現</title>
+  <title>OpenGL.js: 3D描画システム</title>
   <style>
-    /* Reset Margin & Padding */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    /* Prevent Horizontal Scrolling */
     html, body {
       width: 100%;
       height: 100%;
       overflow-x: hidden;
     }
 
-    /* Header Styling */
     header {
       background-color: #333;
       color: white;
       text-align: center;
       font-size: 15px;
-      padding: 20px 0; /* Vertical padding */
+      padding: 20px 0;
     }
 
     nav ul {
@@ -45,64 +42,52 @@
       font-size: 18px;
     }
 
-    /* Parent Container */
     #parent {
       width: 100vw;
-      min-height: calc(100vh - 100px); /* Leaves space for the header & bottom gap */
+      min-height: calc(100vh - 100px);
       display: flex;
       flex-direction: column;
-      gap: 20px; /* Gap between sections */
-      padding-bottom: 20px; /* Space at the bottom */
-      padding-left: 30px; /* Horizontal padding for the colored sections */
-      padding-right: 30px;
+      gap: 20px;
+      padding: 20px;
     }
 
-    /* Left Section: Project Description */
+    #child1, #child2 {
+      background-color: #E3F2FD;
+      padding: 40px;
+      border-radius: 10px;
+    }
+
     #child1 {
-      background-color: #E3F2FD;
-      padding: 40px; /* Adds padding inside the section */
-      border-radius: 10px;
       flex-grow: 1;
+      width: 380px;
     }
 
-    /* Right Section: Media (YouTube Video) */
     #child2 {
-      background-color: #E3F2FD;
-      padding: 40px; /* Adds padding inside the section */
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       flex-grow: 1;
+      width: 220px;
     }
 
-    /* Vertical Padding Between Text Elements */
-    #child1 h2, #child1 p, #child1 ul {
-      margin-bottom: 15px;
-      padding-left: 0; /* Remove default indentation */
-      list-style-position: inside; /* Align bullets with text */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%;
+      height: 0;
     }
 
-    /* Responsive: Switch to Two-Column Layout on Wider Screens */
-    @media (min-width: 600px) {
-      #parent {
-        flex-direction: row;
-        align-items: flex-start;
-        padding-top: 20px; /* Adds gap between header and children */
-      }
-    }
-
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Processing: OpenGL再現</h1>
+    <h1>OpenGL.js: 3D描画システム</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -113,31 +98,34 @@
   </header>
 
   <div id="parent">
-    <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
-
-      <h2>技術スタック</h2>
+      <h2><u>OpenGL.js を用いた3D描画</u></h2>
+      <p>このプロジェクトは、JavaScriptでOpenGLライクな3D描画を行うシステムです。投影・変換・行列スタック・頂点描画の機能を提供し、2種類の投影方式をサポートしています。</p>
+      
+      <h2><u>投影方式</u></h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li>正投影 (Orthographic Projection)</li>
+        <li>透視投影 (Perspective Projection)</li>
       </ul>
-
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      
+      <h3>正投影</h3>
+      <p>遠近感のない投影方式で、UIやCAD向け。</p>
+      <h3>透視投影</h3>
+      <p>遠くの物体が小さく見える自然な投影方式で、3DゲームやVRに適用可能。</p>
+      <br>
+      <img src="../images/opengl_projection.png" alt="投影方式">
     </div>
-
-    <!-- Right Section: YouTube Video -->
+    
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトのコードは<a href="https://github.com/yourrepo/opengl-js" target="_blank">こちら</a>。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/demo_video" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <img src="../images/opengl_test.png" alt="テスト画像">
     </div>
   </div>
 </body>
 </html>
+
