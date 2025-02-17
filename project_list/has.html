@@ -191,16 +191,6 @@
             <li><a>Scale(x, y, z) : 拡大・縮小</a></li>
             <li><a>RotateX(θ), RotateY(θ), RotateZ(θ) : X/Y/Z軸周りの回転</a></li>
         </ul>
-        <li><a><b>描画</b></a></li>
-        <ul>
-            <li><a>BeginShape() → Vertex(x, y, z) → EndShape() の流れで描画</a></li>
-            <li><a>mapToScreen(x, y, z) : 3D座標をスクリーン座標に変換</a></li>
-          </ul>
-        <li><a><b>行列管理</b></a></li>
-        <ul>
-            <li><a>Init_Matrix_Stack() : 行列スタックを初期化</a></li>
-            <li><a>Push_Matrix() / Pop_Matrix() : 行列の保存・復元</a></li>
-        </ul>
       </ul>
       <h2><u>テストケース(projection_test.js)</u></h2>
       <p>キー入力 (1 ~ 9, 0) に応じて、異なるテスト描画が実行できます。</p>
