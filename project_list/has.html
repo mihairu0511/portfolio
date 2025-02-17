@@ -134,23 +134,19 @@
       border-radius: 5px;
     }
 
-    ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
+ul {
+  list-style-type: disc; /* Bullet points */
+  list-style-position: outside; /* Keeps bullets aligned properly */
+  padding-left: 20px;
+}
 
 ul li {
-  list-style-position: outside; /* Ensures bullet points stay aligned */
   padding-left: 5px;
+  text-indent: -1.2em; /* Aligns the second line properly */
 }
 
 ul li::marker {
-  font-size: 1em; /* Adjust marker size if needed */
-}
-
-ul li {
-  text-indent: -1.2em; /* Ensures the second line starts after the bullet */
-  padding-left: 1.2em; /* Aligns text properly */
+  font-size: 1em;
 }
 
 ul ul {
@@ -159,8 +155,8 @@ ul ul {
 }
 
 ul ul li {
-  text-indent: -1em;
   padding-left: 1em;
+  text-indent: -1em;
 }
 
 ul ul ul {
@@ -169,9 +165,10 @@ ul ul ul {
 }
 
 ul ul ul li {
-  text-indent: -0.8em;
   padding-left: 0.8em;
+  text-indent: -0.8em;
 }
+
 
   </style>
 </head>
