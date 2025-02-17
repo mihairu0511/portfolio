@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Processing: p5.jsで遊んでみる</title>
+  <title>OpenGL.js: 3D描画システム</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,17 +116,46 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px
+      gap: 5px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Processing: p5.jsで遊んでみる</h1>
+    <h1>Processing: OpenGL再現</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -113,30 +166,65 @@
   </header>
 
   <div id="parent">
-    <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
-
-      <h2>技術スタック</h2>
+      <h2><u>Processing: OpenGL再現</u></h2>
+      <p>Processing の p5.js では WebGL という OpenGL に非常に似たライブラリが使用されています。その技術の理解を深めるために、OpenGLのような設計で、行列変換・透視投影・頂点描画などの機能を再現していきます。</p>
+      <h2><u>主な機能 (opengl.js)</u></h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li><a><b>投影</b></a>
+          <ul>
+            <li><a>ortho(left, right, bottom, top, near, far) : 正投影（オルソグラフィック）を設定</a></li>
+            <ul>
+              <li><a>遠近感がなく、オブジェクトのスケールは変わりません。</a></li>
+              <li><a>主にUIやCADのような技術用途に使われます。</a></li>
+            </ul>
+            <li><a>perspective(fov, near, far) : 透視投影（パースペクティブ）を設定</a></li>
+            <ul>
+              <li><a>遠近感を持つ描画が可能です。</a></li>
+              <li><a>3Dゲームや仮想現実の視覚効果に使用されます。</a></li>
+            </ul>
+          </ul>
+        </li>
+        <li><a><b>行列変換</b></a></li>
+        <ul>
+            <li><a>Translate(x, y, z) : 座標を平行移動</a></li>
+            <li><a>Scale(x, y, z) : 拡大・縮小</a></li>
+            <li><a>RotateX(θ), RotateY(θ), RotateZ(θ) : X/Y/Z軸周りの回転</a></li>
+        </ul>
+        <li><a><b>描画</b></a></li>
+        <ul>
+            <li><a>BeginShape() → Vertex(x, y, z) → EndShape() の流れで描画</a></li>
+            <li><a>mapToScreen(x, y, z) : 3D座標をスクリーン座標に変換</a></li>
+          </ul>
+        <li><a><b>行列管理</b></a></li>
+        <ul>
+            <li><a>Init_Matrix_Stack() : 行列スタックを初期化</a></li>
+            <li><a>Push_Matrix() / Pop_Matrix() : 行列の保存・復元</a></li>
+        </ul>
       </ul>
-
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2><u>テストケース(projection_test.js)</u></h2>
+      <p>キー入力 (1 ~ 9, 0) に応じて、異なるテスト描画が実行できます。</p>
+      <ul>
+        <li><a>1 ~ 3: 正投影（Ortho）による四角形描画（通常・スケール変換・回転）</a></li>
+        <li><a>4 ~ 5: 顔の描画</a></li>
+        <li><a>6 ~ 9: 立方体の描画（正投影・透視投影）</a></li>
+        <li><a>0: 自分のイニシャルを透視投影で書いてみました。</a></li>
+      </ul>
     </div>
-
-    <!-- Right Section: YouTube Video -->
+    
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトのコードは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。フォルダーをダウンロードしてHTMLファイルをダブルクリックすればテストがウェブで開けます。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/6cARzz9p73A" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <p>正投影（オルソグラフィック）</p>
+      <img src="../images/perspective.jpg" alt="テスト画像">
+      <br>
+      <br>
+      <p>透視投影（パースペクティブ）</p>
+      <img src="../images/ortho.jpg" alt="テスト画像">
     </div>
   </div>
 </body>
