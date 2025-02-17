@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenGL.js: 3D描画システム</title>
+  <title>Hybrid Animal Sound Synthesis</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -155,7 +155,7 @@
 </head>
 <body>
   <header>
-    <h1>Processing: OpenGL再現</h1>
+    <h1>Hybrid Animal Sound Synthesis</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -167,11 +167,11 @@
 
   <div id="parent">
     <div id="child1">
-      <h2><u>Processing: OpenGL再現</u></h2>
-      <p>Processing の p5.js では WebGL という OpenGL に非常に似たライブラリが使用されています。その技術の理解を深めるために、OpenGLのような設計で、行列変換・透視投影・頂点描画などの機能を再現していきます。</p>
-      <h2><u>主な機能 (opengl.js)</u></h2>
+      <h2><u>物理モデル音源</u></h2>
+      <p>物理モデル音源を使って何か新しいものを作るという課題が授業で出されたので色々と調べていたところ、動物の鳴き声に関するリアルタイム演算の研究を見つけました。そこで、異なる動物の発声器官を組み合わせて存在しない動物の音をコンピューター上で再現できるんじゃないかと考え、３人グループでそれに関するオーディオプラグインを作ることにしました。</p>
+      <h2><u>背景と目的</u></h2>
       <ul>
-        <li><a><b>投影</b></a>
+        <li><a><b>従来のクリーチャーボイス制作</b></a>
           <ul>
             <li><a>ortho(left, right, bottom, top, near, far) : 正投影（オルソグラフィック）を設定</a></li>
             <ul>
@@ -185,7 +185,7 @@
             </ul>
           </ul>
         </li>
-        <li><a><b>行列変換</b></a></li>
+        <li><a><b>物理モデリングによるアプローチ</b></a></li>
         <ul>
             <li><a>Translate(x, y, z) : 座標を平行移動</a></li>
             <li><a>Scale(x, y, z) : 拡大・縮小</a></li>
