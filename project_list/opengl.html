@@ -161,7 +161,7 @@
     <div id="child1">
       <h2><u>Processing: OpenGL再現</u></h2>
       <p>Processing の p5.js では WebGL という OpenGL に非常に似たライブラリが使用されています。その技術の理解を深めるために、OpenGLのような設計で、行列変換・透視投影・頂点描画などの機能を再現していきます。</p>
-      <h2><u>主な機能</u></h2>
+      <h2><u>主な機能 (opengl.js)</u></h2>
       <ul>
         <li><a><b>投影</b></a>
           <ul>
@@ -184,9 +184,16 @@
         <ul>
             <li><a>Init_Matrix_Stack() : 行列スタックを初期化</a></li>
             <li><a>Push_Matrix() / Pop_Matrix() : 行列の保存・復元</a></li>
-          </ul>
+        </ul>
       </ul>
-
+      <h2><u>テストケース(projection_test.js)</u></h2>
+      <p>キー入力 (1 ~ 9, 0) に応じて、異なるテスト描画が実行できます。</p>
+      <ul>
+        <li><a>1 ~ 3: 正投影（Ortho）による四角形描画（通常・スケール変換・回転）</a></li>
+        <li><a>4 ~ 5: 顔の描画</a></li>
+        <li><a>6 ~ 9: 立方体の描画（正投影・透視投影）</a></li>
+        <li><a>自分のイニシャルを透視投影で書いてみました。</a></li>
+      </ul>
     </div>
     
     <div id="child2">
