@@ -143,6 +143,11 @@
       list-style-type: circle; /* Change style for sublist */
       margin-left: 20px; /* Indent nested lists */
     }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+    }
   </style>
 </head>
 <body>
@@ -166,7 +171,15 @@
         <li><a><b>投影</b></a>
           <ul>
             <li><a>ortho(left, right, bottom, top, near, far) : 正投影（オルソグラフィック）を設定</a></li>
+            <ul>
+              <li><a>遠近感がなく、オブジェクトのスケールは変わりません。</a></li>
+              <li><a>主にUIやCADのような技術用途に使われます。</a></li>
+            </ul>
             <li><a>perspective(fov, near, far) : 透視投影（パースペクティブ）を設定</a></li>
+            <ul>
+              <li><a>遠近感を持つ描画が可能です。</a></li>
+              <li><a>3Dゲームや仮想現実の視覚効果に使用されます。</a></li>
+            </ul>
           </ul>
         </li>
         <li><a><b>行列変換</b></a></li>
@@ -174,7 +187,7 @@
             <li><a>Translate(x, y, z) : 座標を平行移動</a></li>
             <li><a>Scale(x, y, z) : 拡大・縮小</a></li>
             <li><a>RotateX(θ), RotateY(θ), RotateZ(θ) : X/Y/Z軸周りの回転</a></li>
-          </ul>
+        </ul>
         <li><a><b>描画</b></a></li>
         <ul>
             <li><a>BeginShape() → Vertex(x, y, z) → EndShape() の流れで描画</a></li>
