@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,54 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
