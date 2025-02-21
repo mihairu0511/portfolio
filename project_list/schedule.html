@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,11 +116,46 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
     }
   </style>
 </head>
@@ -113,30 +172,93 @@
   </header>
 
   <div id="parent">
-    <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
-
-      <h2>技術スタック</h2>
+      
+      <h2><u>Scheduler: 授業・試験・課題・To-Do 管理ツール</u></h2>
+      <p>ソフトウェアアーキテクチャーの授業での３人でのプロジェクトです。このプロジェクトは、学生が授業、試験、課題、To-Do タスクを効率的に管理できるように設計されたアンドロイド向けのスケジューラーアプリです。各項目を「授業」「試験」「課題」「To-Do」の4つのタブに分けて表示することで、視覚的に整理された管理体験を提供しています。</p>
+      
+      <h2><u>プロジェクトの特徴</u></h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        
+        <li><a><b>開発環境と言語</b></a>
+          <ul>
+            <li>C言語 を使用した低レベルなハードウェア操作。</li>
+            <li>VSCode と Docker を利用したクロスコンパイル環境。</li>
+          </ul>
+        </li>
+        
+        <li><b>実機 GBA への移植と動作確認</b></li>
+        <ul>
+            <li>フラッシュカートリッジを用いて、GBA の実機に ROM データを転送しました。</li>
+            <li>エミュレーターだけでなく、実際の GBA 本体での動作確認を行い、ハードウェア互換性の検証を実施しました。</li>
+        </ul>
+
+        <li><b>GBA ハードウェアの特性を活かした最適化</b></li>
+        <ul>
+            <li>GBA のハードウェアリソースを最大限に活用するため、以下の技術を駆使しています:</li>
+            <ul>
+              <li>モード 0 を使用したスプライト描画と背景レイヤーの制御。</li>
+              <li>ポインタ操作などでの VRAM の直接操作による、高速なグラフィック更新。</li>
+            </ul>
+        </ul>
+
+        <li><b>ゲームデザインとメカニクス</b></li>
+        <ul>
+          
+          <li><u>タイルとスプライトのデザイン</u></li>
+          <ul>
+            <li>Geometry Dash のようなシンプルなデザインを再現しました。</li>
+            <li>ドット単位で自作したタイルとスプライトを使用しています。</li>
+          </ul>
+          
+          <li><u>スプライトアニメーションと衝突判定</u></li>
+          <ul>
+            <li>ピクセル単位の衝突判定を実装し、プレイヤーの操作感を強化しました。</li>
+            <li>複数のアニメーションステートを管理することで、リアルな動きを表現しています。</li>
+          </ul>
+          
+          <li><u>重力と物理シミュレーション</u></li>
+          <ul>
+            <li>リアルな重力の動きをシミュレートし、プレイヤーキャラクターのジャンプと落下に違和感がないよう設計しました。</li>
+            <li>速度と加速度の計算 を行い、滑らかな物理挙動を実現しています。</li>
+          </ul>
+          
+          <li><u>ゲーム内背景の設計</u></li>
+          <ul>
+            <li>XL 背景を用いて、横スクロールのダイナミックな背景を表現しました。</li>
+            <li>背景のパララックス効果を取り入れ、奥行き感のあるゲーム体験を提供しています。</li>
+          </ul>
+        </ul>
+
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+     <h2><u>キーバインド</u></h2>
+      <ul>
+        <li><b>ENTER:</b> スタート</li>
+        <li><b>BACKSPACE:</b> 一時停止</li>
+        <li><b>L:</b> 決定・ジャンプ</li>
+        <li><b>K:</b> チートモード切り替え（ダブルジャンプできるようになります）</li>
+        <li><b>A:</b> 右</li>
+        <li><b>D:</b> 左</li>
+      </ul>
     </div>
-
-    <!-- Right Section: YouTube Video -->
+    
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/Figure-Rush" target="_blank">こちら</a>。<a href="https://mgba.io" target="_blank">エミュレーター</a>をダウンロードしたらプレイできます。</p>
+      <br>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/Fgntibk_a4U"
+          title="YouTube video player" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <br>
+      <br>
+      <img src="../images/gba.png" alt="テスト画像">
+      <br>
+      <br>
+      <img src="../images/tiles.png" alt="テスト画像">
     </div>
   </div>
 </body>
