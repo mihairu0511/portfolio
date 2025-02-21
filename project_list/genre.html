@@ -194,6 +194,60 @@
           <li>混同行列 や 分類レポート を用いてモデルの性能を評価。</li>
         </ul>
       </ul>
+
+      <h2><u>使用技術・ライブラリ</u></h2>
+      <ul>
+        <li><b>Librosa:</b> 音楽ファイルの特徴量抽出</li>
+        <li><b>Pandas:</b> データの読み込み・前処理</li>
+        <li><b>NumPy:</b> 数値計算・配列操作</li>
+        <li><b>Matplotlib:</b> データの可視化</li>
+        <li><b>Scikit-learn:</b></li>
+        <ul>
+          <li><b>LogisticRegression:</b> 多項ロジスティック回帰モデル</li>
+          <li><b>train_test_split:</b> データの訓練・テスト分割</li>
+          <li><b>StandardScaler:</b> 特徴量の標準化</li>
+          <li><b>confusion_matrix, classification_report:</b> モデルの性能評価</li>
+        </ul>
+      </ul>
+      
+      <h2><u>特徴量の抽出</u></h2>
+      <p>Librosa を使用して、音楽ファイルから以下の特徴量を抽出しました。</p>
+      <ul>
+        
+        <li><b>MFCC (Mel-Frequency Cepstral Coefficients)</b></li>
+        <ul>
+          <li>13次の MFCC を抽出し、音色の特徴が確認できます。</li>
+          <li>各 MFCC の平均値を特徴量として使用しています。</li>
+          <li>音楽の周波数分布を特徴づけるため、ジャンルの識別に有効です。</li>
+        </ul>
+        
+        <li><b>テンポ (Tempo)</b></li>
+        <ul>
+          <li>音楽の BPM (Beats Per Minute) を抽出しています。</li>
+          <li>リズムの速さを表現し、ジャンルごとの特徴を捉えています。</li>
+        </ul>
+
+        <li><b>RMS (Root Mean Square)</b></li>
+        <ul>
+          <li>音のエネルギー量を表します。</li>
+          <li>音の強弱の傾向がジャンルごとに異なることを利用しています。</li>
+        </ul>
+
+        <li><b>スペクトル特徴量</b></li>
+        <ul>
+          <li><b>バンド幅 (Bandwidth):</b> 周波数スペクトルの幅を表しています。</li>
+          <li><b>スペクトル重心 (Centroid):</b> スペクトルの重心位置を表しています。</li>
+          <li><b>スペクトルコントラスト (Contrast):</b> 周波数帯域ごとの振幅差を表しています。</li>
+          <li><b>スペクトルロールオフ (Rolloff):</b> スペクトルエネルギーの 85% をカバーする周波数です。</li>
+        </ul>
+
+        <li><b>ゼロ交差率 (Zero-Crossing Rate)</b></li>
+        <ul>
+          <li>音声波形がゼロを越える回数を抽出しています。</li>
+          <li>パーカッションや高周波成分が多い音楽で高くなる傾向があります。</li>
+        </ul>
+        
+      </ul>
       
     </div>
     
