@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Processing: FFT可視化</title>
+  <title>Processing: オーディオスペクトルモジュレーション</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -102,7 +102,7 @@
 </head>
 <body>
   <header>
-    <h1>Processing: FFT可視化</h1>
+    <h1>Processing: オーディオスペクトルモジュレーション</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -115,18 +115,20 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>オーディオスペクトルモジュレーション</h2>
+      <p>このプログラムは、Beads ライブラリを使用して、オーディオスペクトルモジュレーション (Audio Spectrum Modulation)　を行うものです。音声サンプル（詩の朗読）をスペクトルごとに分解し、そのエネルギー(Power)を元にキャリア波（Square Wave）の周波数帯域ごとに振幅を変調し、可視化します。</p>
 
-      <h2>技術スタック</h2>
+      <h2>目的</h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li>音声の周波数帯域ごとのエネルギーをリアルタイムで可視化します。</li>
+        <li>音声の特徴を元に別の音（キャリア波）を変調し、ボコーダーのような効果が得られます。</li>
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2>全体の流れ</h2>
+      <p>音声の読み込みとループ再生</p>
+      <p>周波数帯域ごとに音声のエネルギーを分析</p>
+      <p>エネルギーに応じて別の音 (キャリア波) の音量を変調</p>
+      <p>エネルギーをリアルタイムに可視化</p>
     </div>
 
     <!-- Right Section: YouTube Video -->
