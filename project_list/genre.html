@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,11 +116,46 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
     }
   </style>
 </head>
@@ -113,30 +172,96 @@
   </header>
 
   <div id="parent">
-    <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
-
-      <h2>技術スタック</h2>
+      <h2><u>物理モデル音源</u></h2>
+      <p>物理モデル音源を使って何か新しいものを作るという課題が授業で出されたので色々と調べていたところ、動物の鳴き声に関するリアルタイム演算の研究を見つけました。そこで、異なる動物の発声器官を組み合わせて存在しない動物の音をコンピューター上で再現できるんじゃないかと考え、３人グループでそれに関するオーディオプラグインを作ることにしました。</p>
+      <h2><u>背景と目的</u></h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li><a><b>従来のクリーチャーボイス制作</b></a>
+          <ul>
+            <li><a>映画やゲームにおける生き物の音作りは、実在の動物や人間の録音を加工することが一般的です。</a></li>
+            <li><a>ピッチシフト、レイヤリング、エフェクト などの手法が用いられますが、録音に依存するため柔軟性に欠けます。</a></li>
+          </ul>
+        </li>
+        <li><a><b>物理モデリングによるアプローチ</b></a></li>
+        <ul>
+            <li><a>実際の動物の発声器官（肺、喉頭、声道など）を数学モデルとして再現し、それらを組み合わせて新しい生物の声をシミュレートします。</a></li>
+            <li><a>録音不要で、リアルタイムに音が生成可能です。</a></li>
+            <li><a>ゲームやVR向けに、動的なサウンドデザインが可能になります。</a></li>
+        </ul>
+      </ul>
+      
+      <h2><u>システムの設計</u></h2>
+      <ul>
+        <li><a><b>ユーザーインターフェース</b></a></li>
+        <ul>
+          <li>GUI上で動物の発声器官、音量や声道の開き具合の変化、ピッチの変化などが選択できます。</li>
+          <li>すべてを選択後、ボタンを押して音をトリガーします。</li>
+        </ul>
+        <li><a><b>音生成のプロセス</b></a></li>
+        <ul>
+          <li>選択された動物モデルの音響特性を利用して基本音を生成します。</li>
+          <li>時間変化に応じて波形を整形します。</li>
+          <li>各動物の声道フィルターを通すことで周波数スペクトルを調整します。</li>
+          <li>ユーザーに視覚フィードバックを提供します。</li>
+        </ul>
+      </ul>
+      
+      <h2><u>実装アプローチ</u></h2>
+      <ul>
+        <li><a><b>MaxMSPでのプロトタイプ開発</b></a></li>
+        <ul>
+          <li>まずは MaxMSP（ビジュアルプログラミング環境）を用いて基本機能を構築しました。</li>
+          <li>これは、既存の動物音声モデリング研究で使用されている PD（Pure Data）パッチ に類似しているため、開発の基盤として適していました。</li>
+        </ul>
+        <li><a><b>JUCE + C++ に移行</b></a></li>
+        <ul>
+          <li>オーディオプラグイン化（AU/VST3）のため、C++（JUCEフレームワーク）に移行しました。</li>
+        </ul>
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2><u>直面した課題と対応</u></h2>
+      <ul>
+        <li><a><b>物理モデルの構築</b></a></li>
+        <ul>
+          <li>まず単一の動物の鳴き声のシンセシスを試みましたが、モデルの逆解析と移植が困難でした。</li>
+          <li>参考文献や既存のPDパッチを分析し、MAXで試作しました。</li>
+        </ul>
+        <li><a><b>MAX/MSP での MVP 開発</b></a></li>
+        <ul>
+          <li>基本の動物音合成 + モジュール化を実装しました。</li>
+          <li>フィードバックループが発散する問題に直面 → 複数回の試行錯誤を経て修正しました。</li>
+        </ul>
+        <li><a><b>GUI の開発</b></a></li>
+        <ul>
+          <li>波形ビジュアライザーや描画可能なエンベロープの実装しました。</li>
+          <li>リアルタイムオーディオ解析を活用し、GUI上で動的に表示しています。</li>
+        </ul>
+        <li><a><b>より多くの動物モデルの統合</b></a></li>
+        <ul>
+          <li>動物ごとの発声メカニズムは物理的に複雑で、精度の高いシミュレーションが困難でした。</li>
+          <li>既存の鳥・哺乳類のモデルを応用し、組み合わせ可能な形に調整しました。</li>
+        </ul>
+      </ul>
     </div>
-
-    <!-- Right Section: YouTube Video -->
+    
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。ソースコード(Max パッチ・Projucer)のzipっとオーディオプラグインのzipをダウンロードできます。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/P-ZN-DfIgzI" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <p>声帯モデル</p>
+      <img src="../images/cord_model.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>声道フィルター</p>
+      <img src="../images/tract_comb.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>環境リバーブ</p>
+      <img src="../images/cave_filter.png" alt="テスト画像">
     </div>
   </div>
 </body>
