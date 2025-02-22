@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Processing: バーチャルテルミン</title>
+  <title>Processing: オーディオスペクトルモジュレーション</title>
   <style>
     /* Reset Margin & Padding */
     * {
@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,17 +116,59 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
   <header>
-    <h1>Processing: バーチャルテルミン</h1>
+    <h1>Processing: オーディオスペクトルモジュレーション</h1>
     <nav>
       <ul>
         <li><a href="../index.html">Home</a></li>
@@ -115,28 +181,63 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>オーディオスペクトルモジュレーション</h2>
+      <p>このプログラムは、Beads ライブラリを使用して、オーディオスペクトルモジュレーション (Audio Spectrum Modulation)　を行うものです。音声サンプル（詩の朗読）をスペクトルごとに分解し、そのエネルギー(Power)を元にキャリア波（Square Wave）の周波数帯域ごとに振幅を変調し、可視化します。</p>
 
-      <h2>技術スタック</h2>
+      <h2>目的</h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li>音声の周波数帯域ごとのエネルギーをリアルタイムで可視化します。</li>
+        <li>音声の特徴を元に別の音（キャリア波）を変調し、ボコーダーのような効果が得られます。</li>
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2>全体の流れ</h2>
+      <p><u><b>音声の読み込みとループ再生:</b></u></p>
+      <ul>
+        <li>音声サンプル (poem.wav) を読み込み、ループ再生します。</li>
+        <li>読み込んだ音声をモジュレーター（変調を行うための元データ）として利用します。</li>
+      </ul>  
+      
+      <p><u><b>周波数帯域ごとに音声のエネルギーを分析:</b></u></p>
+      <ul>
+        <li>音声を16個の周波数帯域に分け、それぞれのエネルギー（音量）をリアルタイムで解析します。</li>
+        <li>人間の聴覚に基づき、対数スケールで周波数を分割します。</li>
+        <li>各帯域のエネルギーをリアルタイムで計算します。</li>
+        <li>音量が大きいほどエネルギーが高く、小さいほどエネルギーが低いと判断されます。</li>
+      </ul>  
+      
+      <p><u><b>エネルギーに応じて別の音 (キャリア波) の音量を変調:</b></u></p>
+      <ul>
+        <li>キャリア波とは、別の音（モジュレーター）の特徴に基づいて音量や音色を変化させる音のことです。</li>
+        <li>正方波（Square Wave）をキャリア波として生成します。</li>
+        <li>各周波数帯域のエネルギーに応じて、キャリア波の音量（振幅）を動的に変化させます。</li>
+        <li>音量が大きいほどエネルギーが高く、小さいほどエネルギーが低いと判断されます。</li>
+        <ul>
+          <li>例えば、低音域のエネルギーが高い時は、低音のキャリア波の音量が大きくなり、高音域のエネルギーが低い時は、高音のキャリア波の音量が小さくなります。</li>
+        </ul>
+      </ul>  
+      
+      <p><u><b>エネルギーをリアルタイムに可視化:</b></u></p>
+      <ul>
+        <li>各周波数帯域のエネルギーをリアルタイムでバーグラフとして表示します。</li>
+        <li>音声の周波数ごとのエネルギーの動きを視覚的に確認できます。</li>
+        <li>音声のエネルギーが高い帯域はバーが高く表示され、エネルギーが低い帯域はバーが低く表示されます。</li>
+      </ul>  
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。ソースコード(Max パッチ・Projucer)のzipっとオーディオプラグインのzipをダウンロードできます。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/oluM8mFFKSo" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <p>エネルギー解析</p>
+      <img src="../images/fft_analysis.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>エネルギーの可視化</p>
+      <img src="../images/fft_visual.png" alt="テスト画像">
     </div>
   </div>
 </body>
