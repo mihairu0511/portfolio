@@ -203,7 +203,34 @@
         <li>例: 基本波 440Hz → 倍音: 880Hz, 1760Hz, ...</li>
         <li>倍音の音量は、次数が上がるごとに半減。</li>
       </ul>  
-    
+
+      <h2>動作の流れ</h2>
+      <ul>
+        
+        <li>2Dスライダーの作成:</li>
+        <ul>
+          <li>X軸: 音程 (110Hz ~ 880Hz)、Y軸: 音量 (0.0 ~ 1.0)。</li>
+        </ul>
+        
+        <li>10個の倍音生成:</li>
+        <ul>
+          <li>基本波 + 倍音を重ねて音を作成。</li>
+        </ul>
+        
+        <li>周波数と音量の変調:</li>
+        <ul>
+          <li>X軸の動きで音程 (周波数) を滑らかに変化 (Glide Object)。</li>
+          <li>Y軸の動きで音量 (Gain Object) を変化。</li>
+        </ul>
+        
+        <li>音の合成と出力:</li>
+        <ul>
+          <li>10個の倍音を合成し、1つの音として出力。</li>
+          <li>masterGainを経由して、AudioContext (ac.out) に接続。</li>
+        </ul>
+        
+      </ul>
+  
     </div>
 
     <!-- Right Section: YouTube Video -->
@@ -211,7 +238,7 @@
       <p>プロジェクトは<a href="https://github.com/mihairu0511/opengl-js" target="_blank">こちら</a>。ソースコード(Max パッチ・Projucer)のzipっとオーディオプラグインのzipをダウンロードできます。</p>
       <br>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/oluM8mFFKSo" title="YouTube video player" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/t74wABim1qw" title="YouTube video player" allowfullscreen></iframe>
       </div>
       <br>
       <p>エネルギー解析</p>
