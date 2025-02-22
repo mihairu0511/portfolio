@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,54 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
@@ -115,29 +181,102 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>カセットプレイヤーの動作を再現</h2>
+      <p>Beads ライブラリを用いてオーディオサンプルの再生・停止・早送り・巻き戻しを実装し、ControlP5 を使った GUI (ボタン・スライダー) によって、Play (再生)、Stop (停止)、Fast Forward (早送り)、Rewind (巻き戻し) の4種類の操作をボタンで切り替え、ボリュームをスライダーで調整することができます。さらに、カセットプレイヤー特有の動作を忠実に再現するために、再生開始・停止時にテープリールが滑らかに回転を開始・停止する動作を取り入れています。</p>
 
-      <h2>技術スタック</h2>
+      <h2>機能の概要</h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li>4種類の波形をボタンで切り替え</li>
+        <li>Interactive モードで10個の倍音をスライダーで調整し、音色を自由にデザイン</li>
+        <li>オシロスコープでリアルタイムに波形を視覚化</li>
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2>基本動作の流れ</h2>
+      <ul>
+        <li>オーディオの初期化と波形生成</li>
+        <li>倍音の生成と合成</li>
+        <li>波形の切り替えと倍音の音量調整</li>
+        <li>オシロスコープで波形をリアルタイム表示</li>
+        <li>ControlP5 を用いた GUI 操作</li>
+      </ul>
+
+      <h2>実装の仕組み</h2>
+
+  <ul>
+    <li><b>倍音の生成と合成</b>
+      <ul>
+        <li>10個の倍音を正弦波で生成し、音色を構成します。</li>
+        <li>基本波 (Fundamental) の倍数 (2倍, 3倍, ... 10倍) の周波数を設定。</li>
+        <li>Gain を用いて、各倍音の音量を調整します。</li>
+        <li>masterGain で 全ての倍音を合成して、1つの音として出力します。</li>
+      </ul>
+    </li>
+
+    <li><b>波形の切り替え</b>
+      <ul>
+        <li>ボタン操作で、基本波、矩形波、のこぎり波、三角波の4種類 + Interactive の波形を切り替えます。</li>
+        <li><b>Fundamental (基本波)</b>:
+          <ul>
+            <li>440Hzの基本波のみを鳴らします。</li>
+            <li>他の倍音は音量を0にして、純粋な正弦波を再現。</li>
+          </ul>
+        </li>
+        <li><b>Square (矩形波)</b>:
+          <ul>
+            <li>奇数倍音のみを重ねて矩形波 (Square Wave) を作成。</li>
+            <li>1次、3次、5次... の奇数倍音のみを使用。</li>
+            <li>次数が上がるごとに音量を 1/n に減衰させ、角張った音色を再現。</li>
+          </ul>
+        </li>
+        <li><b>Sawtooth (のこぎり波)</b>:
+          <ul>
+            <li>全ての倍音を重ねてのこぎり波を作成。</li>
+            <li>次数が上がるごとに音量を 1/n に減衰させ、鋭い音色を再現。</li>
+          </ul>
+        </li>
+        <li><b>Triangle (三角波)</b>:
+          <ul>
+            <li>奇数倍音のみを重ねて三角波を作成。</li>
+            <li>次数が上がるごとに音量を 1/n² に減衰させ、滑らかな音色を再現。</li>
+          </ul>
+        </li>
+        <li><b>Interactive</b>:
+          <ul>
+            <li>ControlP5 のスライダーを使用して、10個の倍音の音量 (Gain) を個別に調整できます。</li>
+            <li>各スライダーは、1次から10次倍音までの音量をリアルタイムにコントロールできます。</li>
+            <li>スライダーの操作がそのまま音色に反映され、倍音の構成を動的に変更して音色をデザインできます。</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><b>オシロスコープによる波形のリアルタイム表示</b>
+      <ul>
+        <li>オシロスコープを実装して、リアルタイムで波形を視覚化。</li>
+        <li>倍音の構成が波形に与える影響を視覚的に確認できます。</li>
+        <li>波形が音色に与える影響を視覚的に理解することができます。</li>
+      </ul>
+    </li>
+  </ul>
+
+      
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/wave_visualizer" target="_blank">こちら</a>。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/_2vd03Ml_PY" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <br>
+      <p>矩形波とのこぎり波の倍音合成</p>
+      <img src="../images/square+sawtooth.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>オシロスコープ</p>
+      <img src="../images/oscilloscope.png" alt="テスト画像">
     </div>
-  </div>
 </body>
 </html>
