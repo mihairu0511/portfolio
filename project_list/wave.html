@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,54 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
@@ -115,29 +181,98 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>FFT（高速フーリエ変換）とフィルターの効果を視覚的に確認</h2>
+      <p>Beads ライブラリ を用いて オーディオスペクトルのリアルタイム表示 を行い、ControlP5 を使った GUI (ボタン・スライダー) によって、Low-Pass (ローパス), High-Pass (ハイパス), Band-Pass (バンドパス) の3種類のフィルターを切り替え、カットオフ周波数を操作することができます。また、FFT（高速フーリエ変換）を使用して周波数スペクトルを可視化し、リアルタイムでフィルターの効果を視覚的に確認できます。</p>
 
-      <h2>技術スタック</h2>
+      <h2>機能の概要</h2>
       <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
+        <li>オーディオサンプル (techno.wav) のループ再生</li>
+        <li>ローパス、ハイパス、バンドパスのフィルター切り替え</li>
+        <li>カットオフ周波数のリアルタイム調整</li>
+        <li>FFT による周波数スペクトルのリアルタイム表示</li>
       </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+      <h2>基本動作の流れ</h2>
+      <ul>
+        <li>オーディオの読み込みとループ再生</li>
+        <li>フィルターの設定と切り替え</li>
+        <li>FFT を用いたスペクトル解析</li>
+        <li>スペクトルのリアルタイム表示</li>
+        <li>ControlP5 を用いた GUI 操作</li>
+      </ul>
+
+      <h2>実装の仕組み</h2>
+<ul>
+  <li>
+    <b><u>FFT (高速フーリエ変換) によるスペクトル解析</u></b>
+    <ul>
+      <li>FFT (Fast Fourier Transform) は、時間領域のオーディオ信号を周波数領域に変換します。</li>
+      <li>音楽信号は、時間の経過に伴って変化する波形 ですが、FFTを用いることで、各周波数成分の強さ (振幅) を取得できます。</li>
+      <li>このプログラムでは、FFT を用いて、512個の周波数帯域に分けてスペクトルを解析しています。</li>
+      <li>低音域は左、高音域は右に表示され、各帯域の音量の強弱を視覚的に確認できます。音楽のビートに合わせてバーが上下します。</li>
+    </ul>
+  </li>
+  
+  <li>
+    <b><u>フィルターの種類と切り替え</u></b>
+    <ul>
+      <li>
+        BiquadFilter を用いて、3種類のフィルターを実装しています。
+        <ul>
+          <li><b>Low-Pass Filter (ローパスフィルター):</b> カットオフ周波数より低い音だけを通します</li>
+          <li><b>High-Pass Filter (ハイパスフィルター):</b>　カットオフ周波数より高い音だけを通します</li>
+          <li><b>Band-Pass Filter (バンドパスフィルター):</b>　特定の周波数帯域だけを通します。</li>
+        </ul>
+      </li>
+      <li>ボタンでフィルターの種類を切り替えられるため、リアルタイムでフィルターの効果を確認することが可能です。</li>
+    </ul>
+  </li>
+  
+  <li>
+    <b><u>スペクトルのリアルタイム表示</u></b>
+    <ul>
+      <li>スペクトルのエネルギーをバー (棒グラフ) でリアルタイムに表示しています。</li>
+      <li>各バーは、周波数帯域ごとのエネルギー (音量) を表現しています。</li>
+      <li>低音域は左、高音域は右 に表示されるため、周波数ごとの音量のバランスを視覚的に確認できます。</li>
+      <li>音楽のビートに合わせてバーが上下するため、リアルタイムのスペクトルアナライザーとして機能します。</li>
+    </ul>
+  </li>
+  
+  <li>
+    <b><u>ControlP5 を用いた GUI 操作</u></b>
+    <ul>
+      <li>ControlP5ライブラリを用いて、ボタンとスライダーを作成。</li>
+      <li>3種類のフィルターをボタンで切り替え、スライダーでカットオフ周波数を調整できます。</li>
+      <li>
+        <b>ボタンの設定:</b>
+        <ul>
+          <li><b>Lowpass Filter ボタン:</b> 低音だけを通すローパスフィルターに切り替え。</li>
+          <li><b>Highpass Filter ボタン:</b> 高音だけを通すハイパスフィルターに切り替え。</li>
+          <li><b>Bandpass Filter ボタン:</b> 特定の周波数帯域を通すバンドパスフィルターに切り替え。</li>
+          <li><b>No Filter ボタン:</b> フィルターをオフにして、元の音をそのまま再生。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+      
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/Audio-Spectral-Modulation" target="_blank">こちら</a>。</p>
+      <br>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/W0VeZSeGOOs" title="YouTube video player" allowfullscreen></iframe>
+      </div>
+      <br>
+      <p>フィルターの切り替え</p>
+      <img src="../images/filter_filters.png" alt="テスト画像">
+      <br>
+      <br>
+      <p>スペクトルのリアルタイム表示</p>
+      <img src="../images/filter_visual.png" alt="テスト画像">
     </div>
-  </div>
 </body>
 </html>
