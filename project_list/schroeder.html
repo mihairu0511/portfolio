@@ -195,30 +195,28 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-    <h2>ボコーダーを作ってみる</h2>
-    <p>このボコーダーは、Max/MSP を使用して作成されており、FFT（高速フーリエ変換）を用いて音声信号を周波数帯域に分解し、キャリア信号とモジュレーター信号を組み合わせることで、ロボットボイスやシンセサイザーボイスを生成します。</p>
 
-    <h2>概要：</h2>
-    <p>このプロジェクトは、<b>Schroeder リバーブ</b> を Max/MSP を用いて実装したものです。Schroeder リバーブは、<b>オールパスフィルター (All-Pass Filters)</b> と <b>コンブフィルター (Comb Filters)</b> を組み合わせて、自然な残響音を作成する初期のデジタルリバーブ技術です。この実装では、複数のフィルターを並列に配置し、最終的にミキシングマトリックス (Mixing Matrix) で合成して出力します。</p>
+    <h2>シュレーダーリバーブ</h2>
+    <p>このプロジェクトは、シュレーダーリバーブ (Schroeder Reverb) を Max/MSP を用いて実装したものです。シュレーダーリバーブは、オールパスフィルター (All-Pass Filters)とコームフィルター (Comb Filters)を組み合わせて、自然な残響音を作成する初期のデジタルリバーブ技術です。この実装では、複数のフィルターを並列に配置し、最終的にミキシングマトリックスで合成して出力します。</p>
 
     <h2>機能の概要：</h2>
     <ul>
         <li>オーディオの再生
             <ul>
-                <li>サンプル音声 (duduk.aif) の再生機能</li>
+                <li>サンプル音声の再生機能</li>
                 <li>ループ再生による持続的なリバーブ効果の確認</li>
             </ul>
         </li>
         <li>オールパスフィルター (All-Pass Filters)
             <ul>
-                <li>3 つの All-Pass Filters を並列に配置</li>
+                <li>3つの All-Pass Filters を並列に配置</li>
                 <li>各フィルターに異なるディレイタイムを設定</li>
                 <li>位相の変更により、音の密度を高め、拡散効果を作成</li>
             </ul>
         </li>
-        <li>コンブフィルター (Comb Filters)
+        <li>コームフィルター (Comb Filters)
             <ul>
-                <li>4 つの Comb Filters を並列に配置</li>
+                <li>4つの Comb Filters を並列に配置</li>
                 <li>各フィルターに異なるディレイタイムを設定</li>
                 <li>フィードバックを用いて共鳴を作成し、自然な残響音を生成</li>
             </ul>
@@ -241,15 +239,15 @@
     <ul>
         <li>オールパスフィルター (All-Pass Filters)
             <ul>
-                <li>3 つの All-Pass Filters を使用して、入力信号の位相を変更</li>
+                <li>3つの All-Pass Filters を使用して、入力信号の位相を変更</li>
                 <li>各フィルターに異なるディレイタイムを設定 (例: 347, 113, 37 ミリ秒)</li>
                 <li>ディレイ後にゲインを調整し、フィードバックループを形成</li>
                 <li>音の密度を高め、ディフューズ効果を作成</li>
             </ul>
         </li>
-        <li>コンブフィルター (Comb Filters)
+        <li>コームフィルター (Comb Filters)
             <ul>
-                <li>4 つの Comb Filters を使用して、共鳴音を作成</li>
+                <li>4つの Comb Filters を使用して、共鳴音を作成</li>
                 <li>各フィルターに異なるディレイタイムを設定 (例: 1687, 1601, 2053, 2251 ミリ秒)</li>
                 <li>ディレイタイムごとにフィードバック量を調整 (例: 0.773, 0.802, 0.753, 0.733)</li>
                 <li>共鳴のピークを生成し、残響音の尾を作成</li>
@@ -265,26 +263,17 @@
         <li>ライブゲイン (Live Gain)
             <ul>
                 <li>最終出力の音量を調整</li>
-                <li>音のクリッピングを防ぐために、適切なゲインレベル (-49 dB 推奨) を設定</li>
+                <li>音のクリッピングを防ぐために、適切なゲインレベルを設定</li>
                 <li>リアルタイムで音量を監視・調整可能</li>
             </ul>
         </li>
-    </ul>
-
-    <h2>特徴と応用例：</h2>
-    <ul>
-        <li>Schroeder リバーブは、<b>初期のデジタルリバーブ</b> の一つであり、自然な残響を作成するのに適しています。</li>
-        <li>音の密度と広がりを表現するために、<b>All-Pass Filters</b> を使用しています。</li>
-        <li>共鳴音を作成するために、<b>Comb Filters</b> を使用しています。</li>
-        <li>ミキシングマトリックスにより、<b>立体音響 (Spatial Audio)</b> を作成できます。</li>
-        <li>リアルタイムのゲイン調整により、ライブパフォーマンスや音楽制作に適用可能です。</li>
     </ul>
 
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <p>プロジェクトは<a href="https://github.com/mihairu0511/Vocoder" target="_blank">こちら</a>。</p>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/schroeder reverb" target="_blank">こちら</a>。</p>
       <br>
       <div class="video-container">
         <iframe 
