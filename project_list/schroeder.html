@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,68 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    h2{
+      padding-top: 10px; 
+    }
+
+    p {
+      padding-top: 10px; 
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+    
+    ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
@@ -115,28 +195,86 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+    <h2>ボコーダーを作ってみる</h2>
+    <p>このボコーダーは、Max/MSP を使用して作成されており、FFT（高速フーリエ変換）を用いて音声信号を周波数帯域に分解し、キャリア信号とモジュレーター信号を組み合わせることで、ロボットボイスやシンセサイザーボイスを生成します。</p>
 
-      <h2>技術スタック</h2>
-      <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
-      </ul>
+    <h2>機能の概要：</h2>
+    <ul>
+        <li><b>オーディオ入力</b>
+            <ul>
+                <li>マイクを使用してリアルタイムの音声入力</li>
+                <li>オーディオファイルを読み込んで再生</li>
+            </ul>
+        </li>
+        <li><b>FFTとIFFTによる周波数分析・合成</b>
+            <ul>
+                <li><code>pfft~</code> オブジェクトを使用して、FFT と IFFT を実行</li>
+                <li>各周波数帯域ごとの振幅と位相を取得</li>
+            </ul>
+        </li>
+        <li><b>リングモジュレーション / 周波数変調 / 振幅変調</b>
+            <ul>
+                <li><b>RM（Ring Modulation）</b>：入力信号とキャリア信号を掛け合わせ、金属的な音を生成</li>
+                <li><b>FM（Frequency Modulation）</b>：キャリア信号の周波数を変調し、複雑な倍音を生成</li>
+                <li><b>AM（Amplitude Modulation）</b>：キャリア信号の音量を変調し、音の揺らぎを作成</li>
+            </ul>
+        </li>
+        <li><b>シュレーダーリバーブ</b>
+            <ul>
+                <li><code>p Shroder</code> を使用して、シュレーダーリバーブを追加</li>
+                <li>音に奥行きを与え、空間的な広がりを作成</li>
+            </ul>
+        </li>
+        <li><b>マスターゲインと出力</b>
+            <ul>
+                <li>最終的な音量を調整する Master Gain</li>
+                <li>スペクトラムアナライザーでリアルタイムに周波数スペクトルを視覚化</li>
+            </ul>
+        </li>
+    </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+    <h2>実装の仕組み：</h2>
+    <ul>
+        <li><b>FFT と IFFT の使用</b>
+            <ul>
+                <li><code>pfft~</code> オブジェクトを使用して、FFT（高速フーリエ変換）を実行</li>
+                <li>各帯域ごとに>振幅と位相を取得</li>
+                <li>IFFT（逆フーリエ変換）を用いて、処理後の信号を再構成</li>
+            </ul>
+        </li>
+        <li><b>周波数帯域ごとのエンベロープの適用</b>
+            <ul>
+                <li>各周波数帯域の振幅エンベロープを取得</li>
+                <li>モジュレーター信号のエンベロープをキャリア信号に適用してボコーダー効果を実現</li>
+            </ul>
+        </li>
+      
+        <li><b>GUI と操作方法</b>
+            <ul>
+                <li>キャリア信号の切り替え、フィルターのオン/オフ、モジュレーションの深さの調整を操作可能</li>
+            </ul>
+        </li>
+    </ul>
+
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/Vocoder" target="_blank">こちら</a>。</p>
+      <br>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/m4XmNMunzM4"
+          title="YouTube video player" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <br>
+      <br>
+      <img src="../images/vocoder_main.png" alt="テスト画像">
+      <br>
+      <br>
+      <img src="../images/vocoder_fft.png" alt="テスト画像">
     </div>
   </div>
 </body>
