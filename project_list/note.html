@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,68 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    h2{
+      padding-top: 10px; 
+    }
+
+    p {
+      padding-top: 10px; 
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+    
+    ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
@@ -115,28 +195,88 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>インベーダーゲームのような宇宙船ゲームを作ってみる</h2>
+      <p>
+        インベーダーゲームにインスパイアされた 
+        宇宙船ボスバトルゲームを GBA の Mode 3 を使用して作ってみました。
+        プレイヤーは宇宙船を操作して、敵のボス宇宙船を倒すことを目指します。
+        敵の追尾爆弾を避けながら、レーザーを撃ってボスの HP を 0 にすることで勝利します。
+    </p>
 
-      <h2>技術スタック</h2>
-      <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
-      </ul>
+    <h2>目標</h2>
+    <ul>
+        <li>敵の宇宙船を倒すことが目標です。</li>
+        <li>レーザー を使ってボスの HP を 0 にすると勝利。</li>
+        <li>敵の爆弾がプレイヤーを追尾し、3回当たるとゲームオーバー。</li>
+        <li>3回被弾する前にボスを倒すことが求められます。</li>
+    </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+    <h2>ステートナビゲーション</h2>
+    <ul>
+        <li><b>Start：</b> 
+            <ul>
+                <li>ゲームの開始画面です。</li>
+                <li>Start ボタンを押すことで、<b>Game 状態</b> に移行します。</li>
+            </ul>
+        </li>
+        <li><b>Game：</b>
+            <ul>
+                <li>実際にプレイするゲーム状態です。</li>
+                <li>宇宙船を操作し、ボスを攻撃して倒します。</li>
+                <li>Select ボタンを押すことで、<b>Pause 状態</b> に移行します。</li>
+                <li>ボスの HP が 0 になると <b>Win 状態</b> に移行します。</li>
+                <li>被弾回数が 3 回になると <b>Lose 状態</b> に移行します。</li>
+            </ul>
+        </li>
+        <li><b>Pause：</b>
+            <ul>
+                <li>ゲームを一時停止 する状態です。</li>
+                <li>Select ボタンをもう一度押すと、<b>Game 状態</b> に復帰します。</li>
+            </ul>
+        </li>
+        <li><b>Win：</b>
+            <ul>
+                <li>ボスの HP を0にして倒すと、この状態に移行します。</li>
+                <li>プレイヤーの勝利画面が表示されます。</li>
+                <li>Start ボタンを押すと <b>Start 状態</b> に戻り、再プレイ可能です。</li>
+            </ul>
+        </li>
+        <li><b>Lose 状態：</b>
+            <ul>
+                <li>敵の爆弾に3回被弾すると、この状態に移行します。</li>
+                <li>プレイヤーの敗北画面が表示されます。</li>
+                <li>Start ボタンを押すと <b>Start 状態</b> に戻り、再挑戦可能です。</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>コントロール方法</h2>
+    <ul>
+        <li><b>十字キー：</b>　移動</b></li>
+        <li><b>A ボタン：</b> レーザーを発射</li>
+        <li><b>Start ボタン：</b> ゲームを開始</li>
+        <li><b>Select ボタン：</b> ゲームを一時停止</li>
+    </ul>
+
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/invader-game" target="_blank">こちら</a>。<a href="https://mgba.io" target="_blank">エミュレーター</a>をダウンロードしたらプレイできます。</p>
+      <br>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/axwF6LVT7is"
+          title="YouTube video player" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <br>
+      <br>
+      <img src="../images/invadergame.png" alt="テスト画像">
+      <br>
+      <br>
+      <img src="../images/spaceship.png" alt="テスト画像">
     </div>
   </div>
 </body>
