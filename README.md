@@ -1,3 +1,3 @@
 # porfolio
 
-ポートフォリオはこちら https://mihairu0511.github.io/porfolio/
+ポートフォリオはこちら https://mihairu0511.github.io/portfolio/
