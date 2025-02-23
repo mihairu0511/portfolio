@@ -62,8 +62,23 @@
       background-color: #E3F2FD;
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
+      display: flex;
+      flex-direction: column; /* Stack content vertically */
+      justify-content: left;
+      align-items: left;
       flex-grow: 1;
+      width: 380px; /* Fixed width like before */
+      flex-shrink: 0; /* Prevent shrinking */
     }
+
+    /* Ensure the image inside #child1 matches the styling of #child2 */
+    #child1 img {
+      margin-top: 20px; /* Adds space between text and image */
+      max-width: 100%; /* Ensures the image does not exceed the container width */
+      height: auto; /* Maintains aspect ratio */
+      border-radius: 5px; /* Optional: Adds a rounded border like a YouTube iframe */
+    }
+
 
     /* Right Section: Media (YouTube Video) */
     #child2 {
@@ -71,9 +86,18 @@
       padding: 40px; /* Adds padding inside the section */
       border-radius: 10px;
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Stack children vertically */
+      justify-content: left;
       align-items: center;
       flex-grow: 1;
+      width: 220px; /* Set to your desired fixed width */
+      flex-shrink: 0; /* Prevent shrinking */
+    }
+
+    #child2 img {
+      margin-top: 0px; /* Adds space between the video and the image */
+      max-width: 100%; /* Ensures it fits within the container */
+      height: auto; /* Maintains aspect ratio */
     }
 
     /* Vertical Padding Between Text Elements */
@@ -92,12 +116,68 @@
       }
     }
 
-    /* Responsive YouTube Video */
-    iframe {
-      max-width: 100%;
-      height: auto;
+        /* Responsive YouTube Video */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      padding-bottom: 56.25%; /* Maintains 16:9 aspect ratio */
+      height: 0;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 5px;
     }
+
+    h2{
+      padding-top: 10px; 
+    }
+
+    p {
+      padding-top: 10px; 
+    }
+
+    ul {
+      list-style-type: disc; /* Ensure bullet points appear */
+      padding-left: 20px; /* Adjust left indentation */
+    }
+    
+    ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul {
+      list-style-type: circle; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+    }
+
+    ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+
+    ul ul ul {
+      list-style-type: square; /* Change style for sublist */
+      margin-left: 20px; /* Indent nested lists */
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    ul ul ul li {
+      padding-left: 20px;
+      padding-top: 10px; 
+      text-indent: -1.3rem;
+    }
+    
   </style>
 </head>
 <body>
@@ -115,28 +195,112 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
 
-      <h2>技術スタック</h2>
-      <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
-      </ul>
+<h2>簡易シンセサイザー</h2>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+<p>
+この Max パッチは、ラップトップのキーボードを MIDI ノート値にマッピングし、ピアノキーボードのように音楽の音高を再生します。各キーの押下により、ADSR エンベロープをトリガーして音の始まり、中間、終わりのフェーズを制御します。また、キー情報を利用して、適切な周波数を選択し、波形テーブルの再生を制御します。
+</p>
+
+<h2>機能</h2>
+<ul>
+  <li>キーボード入力を MIDI ノート値にマッピング</li>
+  <li>ADSR エンベロープで音の始まり、中間、終わりのフェーズを制御</li>
+  <li>波形テーブルの再生を周波数情報で制御</li>
+  <li>正弦波 (Sinusoid) とサンプルの両方を再生可能</li>
+</ul>
+
+<h2>実装の仕組み</h2>
+
+<p><b>キーボード入力のマッピング</b></p>
+<ul>
+  <li>キーボードの各キーを MIDI ノート値にマッピングし、ピアノキーボードのように音を鳴らします。</li>
+  <li>2 行目 (Q ～ U) が白鍵、3 行目 (2 ～ 7) が黒鍵に対応。</li>
+</ul>
+
+<p><b>波形の選択</b></p>
+<ul>
+  <li>ラジオボタンで 3 種類の波形を選択:
+    <ul>
+      <li>Sine 波 (正弦波)</li>
+      <li>Sample (サンプル波形)</li>
+      <li>FM (周波数変調)</li>
+    </ul>
+  </li>
+  <li>Sub-patch にて、それぞれの波形生成のロジックを構築。</li>
+</ul>
+
+<p><b>FM 合成の実装</b></p>
+<ul>
+  <li>Frequency Modulation (FM) を実装し、キャリア周波数にモジュレータを掛け合わせることで音色を変化。</li>
+  <li>FM の深さ (Depth of FM) をスライダーで調整可能。</li>
+</ul>
+
+<p><b>AM 合成の実装</b></p>
+<ul>
+  <li>Amplitude Modulation (AM) を実装し、モジュレータによって音量を周期的に変化させます。</li>
+  <li>AM のモジュレータ周波数をスライダーで調整可能。</li>
+</ul>
+
+<p><b>サンプルの読み込みと再生</b></p>
+<ul>
+  <li>サンプル波形を wave~ オブジェクトに読み込み、波形テーブルとして使用。</li>
+  <li>buffer~ オブジェクトを用いて、サンプル波形を格納。</li>
+  <li>phasor~ を使って波形テーブルを読み込み、サンプルの再生を制御。</li>
+</ul>
+
+<p><b>ADSR エンベロープによる音の制御</b></p>
+<ul>
+  <li>ADSR エンベロープを用いて、音の開始 (Attack)、減衰 (Decay)、持続 (Sustain)、終了 (Release) の各フェーズを制御。</li>
+  <li>ADSR により、音の立ち上がりや減衰のスムーズな変化を実現。</li>
+</ul>
+
+<p><b>波形テーブルの読み込みとトランスポーズ</b></p>
+<ul>
+  <li>波形テーブルにサンプルを読み込み、異なる周波数で再生することで音程を変化させます。</li>
+  <li>transratio オブジェクトを用いて、サンプルのトランスポーズ (音程変更) を実現。</li>
+</ul>
+
+<p><b>波形の選択とルーティング</b></p>
+<ul>
+  <li>3 つの波形 (Sine、Sample、FM) を sub-patch で実装。</li>
+  <li>各 sub-patch から出力された波形をルーティングして最終出力へ送信。</li>
+</ul>
+
+<h2>応用例と可能性</h2>
+<ul>
+  <li>FM 合成を利用して、複雑な倍音を持つ音色を生成。</li>
+  <li>AM 合成を利用して、ビブラートやトレモロのようなエフェクトを実現。</li>
+  <li>サンプル波形を波形テーブルとして再利用し、音のレイヤリングやテクスチャの作成。</li>
+  <li>ADSR エンベロープを用いた動的な音色変化により、リアルな楽器の表現。</li>
+</ul>
+
+<h2>まとめ</h2>
+<p>
+この Max パッチは、ラップトップのキーボードを MIDI ノート値にマッピングし、ピアノキーボードのように音を鳴らすことができます。3 種類の波形 (Sinusoid、Sample、FM) を選択可能で、ADSR エンベロープを用いた音の制御、FM/AM 合成による音色の変化が実現されています。さらに、サンプル波形のトランスポーズ (音程変更) を行うことで、リアルな楽器音を再現することができます。
+</p>
+
+
+
     </div>
 
     <!-- Right Section: YouTube Video -->
     <div id="child2">
-      <iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
-        gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
+      <p>プロジェクトは<a href="https://github.com/mihairu0511/schroeder-reverb" target="_blank">こちら</a>。</p>
+      <br>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/m4XmNMun"
+          title="YouTube video player" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <br>
+      <br>
+      <img src="../images/allpass.png" alt="テスト画像">
+      <br>
+      <br>
+      <img src="../images/comb_matrix.png" alt="テスト画像">
     </div>
   </div>
 </body>
