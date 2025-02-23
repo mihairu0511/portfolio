@@ -115,18 +115,55 @@
   <div id="parent">
     <!-- Left Section: Project Description -->
     <div id="child1">
-      <h2>プロジェクト概要</h2>
-      <p>このプロジェクトの目的と特徴について説明します。</p>
+      <h2>実装の仕組み</h2>
 
-      <h2>技術スタック</h2>
-      <ul>
-        <li>技術 1</li>
-        <li>技術 2</li>
-        <li>技術 3</li>
-      </ul>
+    <h2>1. Bug Blaster の操作とダーツの発射</h2>
+    <ul>
+        <li>Bug Blaster は D-pad を使用して画面下部を左右に移動 できます。</li>
+        <li>A ボタンを押すと上方向にダーツを発射 します。</li>
+        <li>ダーツは Centipede または Mushroom に衝突するか、画面上部に到達 すると消えます。</li>
+    </ul>
 
-      <h2>開発プロセス</h2>
-      <p>開発プロセスの詳細、直面した課題、解決策などを説明します。</p>
+    <h2>2. Segmented Centipede の動作</h2>
+    <ul>
+        <li>Centipede は複数のセグメントで構成 され、各セグメントはスプライトで表現 されています。</li>
+        <li>画面上部からスタートして左右に移動 します。</li>
+        <li>画面端に到達するか、Mushroom に衝突すると 1 段階下に降りて反対方向に進行 します。</li>
+        <li>ダーツが当たると、そのセグメントが Mushroom に変化 します。</li>
+        <li>Centipede の頭 (Head) は特別なスプライト で表示され、頭にダーツが当たった場合は 100 点、通常のセグメントは 10 点 のスコアが加算されます。</li>
+    </ul>
+
+    <h2>3. Mushroom Field の配置と動作</h2>
+    <ul>
+        <li>Mushroom は Centipede の動きを妨害する障害物 として配置されます。</li>
+        <li>ゲーム開始時にランダムな位置に配置され、各レベルごとに増加 します。</li>
+        <li>レベル 1：32 個 / レベル 2：64 個</li>
+        <li>ダーツが 4 回当たると破壊 され、1 点 のスコアが加算されます。</li>
+    </ul>
+
+    <h2>4. スコアの表示と計算</h2>
+    <ul>
+        <li>画面上部にスコアを表示 し、プレイ中に常に確認 できます。</li>
+        <li>次のアクションでスコアが加算 されます。
+            <ul>
+                <li>Centipede Head を破壊 → 100 点</li>
+                <li>Centipede Segment を破壊 → 10 点</li>
+                <li>Mushroom を破壊 → 1 点</li>
+            </ul>
+        </li>
+        <li>スコアは次のレベルに進んでもリセットされません。</li>
+    </ul>
+
+    <h2>5. ステートマシンと複数レベルの実装</h2>
+    <ul>
+        <li>START, GAME, PAUSE, WIN, LOSE の 5 つの状態を管理 しています。</li>
+        <li>START 状態：A ボタンを押すと GAME 状態に遷移 します。</li>
+        <li>GAME 状態：Bug Blaster を操作して Centipede を倒す 状態です。</li>
+        <li>PAUSE 状態：START ボタンを押すと一時停止。再度 START ボタンで続きから再開。</li>
+        <li>WIN 状態：Centipede をすべて倒すと WIN 状態に遷移。2 レベル目をクリアでゲームクリア。</li>
+        <li>LOSE 状態：Centipede が画面下部に到達 すると LOSE 状態に遷移。</li>
+        <li>WIN, PAUSE, LOSE 状態 から START 状態に戻る ことができます。</li>
+    </ul>
     </div>
 
     <!-- Right Section: YouTube Video -->
